@@ -10,12 +10,13 @@ if ($conn->connect_error) {
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['customer_name'];
-    $quantity = $_POST['water_quantity'];
+    $quantity = (int)$_POST['water_quantity']; // Ensure this is an integer
+    $price = (float)$_POST['price']; // Ensure this is a float
     $date = $_POST['delivery_date'];
 
     // Insert query
-    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date) VALUES (?, ?, ?)");
-    $stmt->bind_param('sis', $name, $quantity, $date);
+    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, price, delivery_date) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param('sids', $name, $quantity, $price, $date); // 's' for string, 'i' for integer, 'd' for decimal, 's' for string (date)
 
     if ($stmt->execute()) {
         echo "<script>alert('Record added successfully!'); window.location.href='dashboard.php';</script>";
@@ -47,6 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3">
                 <label for="water_quantity" class="form-label">Water Quantity (in liters)</label>
                 <input type="number" class="form-control" id="water_quantity" name="water_quantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="price" required>
             </div>
             <div class="mb-3">
                 <label for="delivery_date" class="form-label">Delivery Date</label>

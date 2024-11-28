@@ -1,3 +1,20 @@
+<?php
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Sample credentials (replace with database validation)
+    if ($username === 'Aayush stha' && $password === 'aayush123') {
+        // Redirect to dashboard.php on successful login
+        header('Location: Customer/logout/dashboard/dashboard.php');
+        exit(); // Stop further script execution
+    } else {
+        $error = 'Invalid username or password.';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,47 +22,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <style>
+    /* Add styles as mentioned in the previous response */
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('download.jpg') no-repeat center top;
-      background-size: 1200px 800px; /* Fixed size for the image */
-      background-color: #f0f0f0; /* Fallback color for areas not covered by the image */
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      color: #fff;
     }
+
     .login-container {
       background: rgba(255, 255, 255, 0.9);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 300px;
+      color: #333;
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
       text-align: center;
     }
+
     .login-container h2 {
+      font-size: 24px;
       margin-bottom: 20px;
     }
+
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
     .login-container input {
-      width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      outline: none;
+      transition: all 0.3s;
     }
+
+    .login-container input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
     .login-container button {
-      width: 100%;
       padding: 10px;
-      background-color: #007bff;
-      color: white;
+      font-size: 16px;
+      background: #007bff;
+      color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: all 0.3s;
     }
+
     .login-container button:hover {
-      background-color: #0056b3;
+      background: #0056b3;
     }
+
     .error {
       color: red;
       font-size: 0.9em;
@@ -56,29 +94,14 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <?php
-      $error = '';
-      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          $username = $_POST['username'];
-          $password = $_POST['password'];
-          
-          // Fixed username and password
-          if ($username === 'Aayush stha' && $password === 'aayush123') {
-              echo "<p>Login successful! Welcome, $username.</p>";
-              exit;
-          } else {
-              $error = 'Invalid username or password.';
-          }
-      }
-    ?>
     <form method="POST" action="">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
+      <input type="text" name="username" placeholder="Enter your username" required>
+      <input type="password" name="password" placeholder="Enter your password" required>
       <button type="submit">Login</button>
-      <?php if ($error): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
-      <?php endif; ?>
     </form>
+    <?php if ($error): ?>
+      <p class="error"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
   </div>
 </body>
 </html>

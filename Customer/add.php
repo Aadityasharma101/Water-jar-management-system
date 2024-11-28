@@ -2,7 +2,7 @@
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
-// Check connection
+// Check connection  
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -12,13 +12,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['customer_name'];
     $quantity = (int)$_POST['water_quantity']; // Ensure this is an integer
     $date = $_POST['delivery_date'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
+    // $phone = $_POST['phone_no'];
+    // $email = $_POST['email'];
+
+    // Example price calculation (update as per your logic)
+    $price = $quantity * 10; // Assuming $10 per unit of water
 
     // Insert query
-    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, price, phone, email, delivery_date) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param('sids', $name, $quantity,$phone, $email , $date); // 's' for string, 'i' for integer, 'd' for decimal, 's' for string (date)
+    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date, ) VALUES (?, ?, ?)");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error); // Debugging step
+    }
 
+    // Bind parameters
+    $stmt->bind_param('sidsss', $name, $quantity,  $date);
+
+    // Execute the query
     if ($stmt->execute()) {
         echo "<script>alert('Record added successfully!'); window.location.href='dashboard.php';</script>";
     } else {
@@ -47,22 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" class="form-control" id="customer_name" name="customer_name" required>
             </div>
             <div class="mb-3">
-                <label for="water_quantity" class="form-label">Water Quantity </label>
+                <label for="water_quantity" class="form-label">Water Quantity</label>
                 <input type="number" class="form-control" id="water_quantity" name="water_quantity" required>
             </div>
-            
             <div class="mb-3">
                 <label for="delivery_date" class="form-label">Delivery Date</label>
                 <input type="date" class="form-control" id="delivery_date" name="delivery_date" required>
             </div>
-            <div class="mb-3">
-                <label for="phone-no " class="form-label">phone-no </label>
-                <input type="phone-no " class="form-control" id="phone-no " name="phone-no " required>
-            </div>
-            <div class="mb-3">
-                <label for="email " class="form-label">Email </label>
-                <input type="email " class="form-control" id="email " name="email " required>
-            </div>
+           
             <button type="submit" class="btn btn-primary">Add Record</button>
         </form>
     </div>

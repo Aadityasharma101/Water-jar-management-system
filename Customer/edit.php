@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = $_POST['delivery_date'];
     $status = $_POST['status'];
 
-    $stmt = $conn->prepare("UPDATE water_records SET customer_name = ?, water_quantity = ?, price = ?, delivery_date = ?, status = ? WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE water_records SET customer_name = ?, water_quantity = ?, phone = ?, email = ? ,delivery_date = ?, status = ? WHERE id = ?");
     $stmt->bind_param('sissi', $name, $quantity,  $phone, $date, $email, $status, $id);
     $stmt->execute();
     $stmt->close();

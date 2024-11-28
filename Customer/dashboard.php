@@ -76,7 +76,7 @@ if (!$result) {
             <div class="container mt-4">
                 <h1 class="mb-4">Water Management Dashboard</h1>
                 <!-- Add New Record Button -->
-                <a href="add.php" class="btn btn-primary mb-3">Add New Record</a>
+                <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
 
                 <!-- Records Table -->
                 <div class="card">

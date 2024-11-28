@@ -6,7 +6,8 @@ while ($row = $result->fetch_assoc()) {
         <td>{$row['id']}</td>
         <td>{$row['customer_name']}</td>
         <td>{$row['water_quantity']}</td>
-        <td>{$row['price']}</td>
+        <td>{$row['phone']}</td>
+        <td>{$row['email']}</td>
         <td>{$row['delivery_date']}</td>
         <td>{$row['status']}</td>
         <td>

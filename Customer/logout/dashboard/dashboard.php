@@ -37,7 +37,7 @@ if (!$result) {
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
-                    <a href="logout/dashboard/dashboard.php" class="nav-link text-white active">
+                    <a href="#" class="nav-link text-white active">
                         <i class='bx bxs-dashboard'></i> Dashboard
                     </a>
                 </li>
@@ -90,8 +90,6 @@ if (!$result) {
                                     <th>ID</th>
                                     <th>Customer Name</th>
                                     <th>Water Quantity</th>
-                                    <th>phone</th>
-                                    <th>email</th>
                                     <th>Delivery Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -107,8 +105,6 @@ if (!$result) {
                                             <td>{$row['customer_name']}</td>
                                             <td>{$row['water_quantity']}</td>
                                             <td>{$row['delivery_date']}</td>
-                                            <td>{$row['phone']}</td>
-                                            <td>{$row['email']}</td>
                                             <td>{$row['status']}</td>
                                             <td>
                                                 <a href='edit.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>

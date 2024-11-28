@@ -14,7 +14,6 @@ if (!$result) {
     die("Error executing query: " . $conn->error);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

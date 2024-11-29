@@ -19,13 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $quantity * 10; // Assuming $10 per unit of water
 
     // Insert query
-    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date, ) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date ) VALUES (?, ?, ?)");
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error); // Debugging step
     }
 
     // Bind parameters
-    $stmt->bind_param('sidsss', $name, $quantity,  $date);
+    $stmt->bind_param("sid",$name, $quantity,  $date);
 
     // Execute the query
     if ($stmt->execute()) {

@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h2>Thank You for Your Message!</h2>
         <p>Your message has been sent successfully. We will get back to you soon.</p>
-        <a href="Customer/dashboard.php" class="btn btn-primary">Go to Main Page</a>
+        <a href="../../dashboard.php" class="btn btn-primary">Go to Main Page</a>
     </div>
 </body>
 </html>

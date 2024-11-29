@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
@@ -7,12 +15,37 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch records from the database
-$result = $conn->query("SELECT * FROM water_records");
+// Fetch current user's data
+$user_id = $_SESSION['user_id'];
+$query = "SELECT * FROM users WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('i', $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 
-if (!$result) {
-    die("Error executing query: " . $conn->error);
+// Update user settings if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $new_email = $_POST['email'];
+    $new_password = $_POST['password'];
+    $new_password_hash = password_hash($new_password, PASSWORD_BCRYPT); // Hash the password
+
+    // Update query
+    $update_query = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+    $update_stmt = $conn->prepare($update_query);
+    $update_stmt->bind_param('ssi', $new_email, $new_password_hash, $user_id);
+
+    if ($update_stmt->execute()) {
+        echo "<script>alert('Settings updated successfully!');</script>";
+    } else {
+        echo "<script>alert('Error: " . $update_stmt->error . "');</script>";
+    }
+
+    $update_stmt->close();
 }
+
+// Close the database connection
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -20,65 +53,84 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>User Settings</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Boxicons -->
-    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles for more attractive design */
+        body {
+            background-color: #f4f7fc;
+            font-family: 'Arial', sans-serif;
+        }
 
-    <title>Water Management Dashboard</title>
+        .settings-card {
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .settings-card h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .mb-3 label {
+            font-weight: bold;
+        }
+
+        .alert {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .settings-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="d-flex">
-        <!-- SIDEBAR -->
-        <nav class="bg-dark text-white p-3 vh-100 flex-column" style="width: 250px;">
-            <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
-                <i class='bx bxs-smile fs-3 me-2'></i> <span>CustomerHub</span>
-            </a>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link text-white active">
-                        <i class='bx bxs-dashboard'></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="logout/messeges/messege.php" class="nav-link text-white">
-                        <i class='bx bxs-message-dots'></i> Messages
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="logout/settings/settings.php" class="nav-link text-white">
-                        <i class='bx bxs-cog'></i> Settings
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="logout/logout.php" class="nav-link text-white">
-                        <i class='bx bxs-log-out-circle'></i> Logout
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- MAIN CONTENT -->
-        <div class="w-100">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 shadow-sm">
-                <a class="navbar-brand" href="#">CustomerHub</a>
-                <div class="collapse navbar-collapse">
-                    <form class="d-flex ms-auto">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="settings-card">
+                    <h2>User Settings</h2>
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password" required>
+                            <small class="form-text text-muted">Leave blank if you don't want to change the password.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Update Settings</button>
                     </form>
                 </div>
-            </nav>
+            </div>
+        </div>
+    </div>
 
-        
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<?php
-// Close the database connection
-$conn->close();
-?>

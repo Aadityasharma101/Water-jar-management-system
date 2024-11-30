@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Sample credentials (replace with database validation)
-    if ($username === 'Aayush stha' && $password === 'aayush123') {
+    if ($username === 'Aayush stha' && $password === 'aayush12345') {
         // Redirect to dashboard.php on successful login
         header('Location: Customer/logout/dashboard/dashboard.php');
         exit(); // Stop further script execution

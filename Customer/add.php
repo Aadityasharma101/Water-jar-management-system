@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $email = $_POST['email'];
 
     // Example price calculation (update as per your logic)
-    $price = $quantity * 10; // Assuming $10 per unit of water
-
+    // Assuming $10 per unit of water
+    $price = $quantity * 10; 
     // Insert query
     $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date ) VALUES (?, ?, ?)");
     if ($stmt === false) {

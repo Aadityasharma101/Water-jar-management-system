@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="date" class="form-control" id="delivery_date" name="delivery_date" required>
             </div>
            
-            <!-- <button type="submit" class="btn btn-primary">Add Record</button> -->
+            <button type="submit" class="btn btn-primary">Add Record</button>
         </form>
     </div>
 </body>

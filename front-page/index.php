@@ -78,7 +78,7 @@
     <a href="about.php" class="btn">Learn More</a>
   </section>
   <footer>
-    <p>© 2024 Water-Jar Management System. All rights reserved.</p>
+    <p> Water-Jar Management System. All rights reserved.</p>
   </footer>
 </body>
 </html>

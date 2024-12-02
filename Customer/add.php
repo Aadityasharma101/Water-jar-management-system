@@ -1,13 +1,10 @@
 <?php
-// Database connection
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
-// Check connection  
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['customer_name'];
     $quantity = (int)$_POST['water_quantity']; // Ensure this is an integer
@@ -15,19 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $phone = $_POST['phone_no'];
     // $email = $_POST['email'];
 
-    // Example price calculation (update as per your logic)
     // Assuming $10 per unit of water
     $price = $quantity * 10; 
-    // Insert query
+    //query insert
     $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date ) VALUES (?, ?, ?)");
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error); // Debugging step
     }
 
-    // Bind parameters
     $stmt->bind_param("sid",$name, $quantity,  $date);
 
-    // Execute the query
+    // Execute 
     if ($stmt->execute()) {
         echo "<script>alert('Record added successfully!'); window.location.href='dashboard.php';</script>";
     } else {

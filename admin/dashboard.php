@@ -69,61 +69,12 @@ if (!$result) {
             </nav>
 
             <!-- Dashboard Content -->
-            <div class="container mt-4">
-                <h1 class="mb-4">Water Management Dashboard</h1>
-                <!-- Add New Record Button -->
-                <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
+           
 
-                <!-- Records Table -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Records</h3>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Water Quantity</th>
-                                    <th>phone</th>
-                                    <th>email</th>
-                                    <th>Delivery Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if ($result->num_rows > 0) {
-                                    // Display records
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>
-                                            <td>{$row['id']}</td>
-                                            <td>{$row['customer_name']}</td>
-                                            <td>{$row['water_quantity']}</td>
-                                            <td>{$row['delivery_date']}</td>
-                                            <td>{$row['phone']}</td>
-                                            <td>{$row['email']}</td>
-                                            <td>{$row['status']}</td>
-                                            <td>
-                                                <a href='edit.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
-                                                <a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm'>Delete</a>
-                                            </td>
-                                        </tr>";
-                                    }
-                                } else {
-                                    echo "<tr><td colspan='6' class='text-center'>No records found. Add a new record to get started!</td></tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
+
+
+            
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -3,7 +3,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Example credentials (replace with database validation)
     if ($username == 'admin' && $password == 'admin123') {
         echo "<p>Login successful! Welcome, Admin.</p>";
     } else {

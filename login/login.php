@@ -1,11 +1,10 @@
 <?php
 $error = '';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Sample credentials (replace with database validation)
+    //  (replace with database validation)
     if ($username === 'Aayush stha' && $password === 'aayush12345') {
         // Redirect to dashboard.php on successful login
         header('Location: Customer/logout/dashboard/dashboard.php');
@@ -22,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <style>
-    /* Add styles as mentioned in the previous response */
     body {
       display: flex;
       justify-content: center;
@@ -32,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       background: linear-gradient(to right, #007bff, #00c6ff);
       color: #fff;
     }
-
     .login-container {
       background: rgba(255, 255, 255, 0.9);
       color: #333;
@@ -43,18 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
       text-align: center;
     }
-
     .login-container h2 {
       font-size: 24px;
       margin-bottom: 20px;
     }
-
     .login-container form {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
-
     .login-container input {
       padding: 10px;
       font-size: 16px;
@@ -63,12 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       outline: none;
       transition: all 0.3s;
     }
-
     .login-container input:focus {
       border-color: #007bff;
       box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
-
     .login-container button {
       padding: 10px;
       font-size: 16px;
@@ -79,11 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       cursor: pointer;
       transition: all 0.3s;
     }
-
     .login-container button:hover {
       background: #0056b3;
     }
-
     .error {
       color: red;
       font-size: 0.9em;

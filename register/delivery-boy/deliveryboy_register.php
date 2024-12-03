@@ -16,10 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO admins (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
+    $sql = "INSERT INTO delivery_boys (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Admin registration successful!";
+        echo "Delivery Boy registration successful!";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

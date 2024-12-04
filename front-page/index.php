@@ -11,7 +11,7 @@
       background: url('login/download.jpg') no-repeat center center/cover;
     }
     header {
-      background: rgba(0, 0, 255, 0.8);
+      background: skyblue;
       color: white;
       padding: 15px;
       text-align: center;
@@ -31,14 +31,14 @@
       border-radius: 5px;
     }
     nav a:hover {
-      background: rgba(0, 255, 255, 1);
+      background: rgba(0, 200, 255, 0.8);
     }
     section {
       padding: 20px;
       text-align: center;
     }
     footer {
-      background: rgba(0, 0, 255, 0.8);
+      background: skyblue;
       color: white;
       text-align: center;
       padding: 10px;
@@ -65,12 +65,7 @@
     <h1>Welcome to the Water-Jar Management System</h1>
     <p>Manage water jars efficiently for customers, delivery boys, and admin.</p>
   </header>
-  <nav>
-    <a href="login_admin.php">Admin Login</a>
-    <a href="login_customer.php">Customer Login</a>
-    <a href="login_delivery.php">Delivery Boy Login</a>
-    <a href="contact.php">Contact Us</a>
-  </nav>
+  
   <section>
     <h2>Why Choose Our System?</h2>
     <p>Efficient water jar tracking, customer management, and delivery handling all in one place.</p>

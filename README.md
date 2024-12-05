@@ -59,7 +59,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
 🛡️ Security
-If you discover any security-related issues, please email me at your-email@example.com instead of using the issue tracker.
+If you discover any security-related issues, please email me at stha70049.com instead of using the issue tracker.
 
 🚀 Future Enhancements
 Add payment gateway integration.

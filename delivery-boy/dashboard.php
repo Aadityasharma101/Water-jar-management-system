@@ -29,7 +29,7 @@ if (!$result) {
         <!-- SIDEBAR -->
         <nav class="bg-dark text-white p-3 vh-100 flex-column" style="width: 250px;">
             <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
-                <i class='bx bxs-smile fs-3 me-2'></i> <span>CustomerHub</span>
+                <i class='bx bxs-smile fs-3 me-2'></i> <span>DeliveryHub</span>
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
@@ -59,7 +59,7 @@ if (!$result) {
         <div class="w-100">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 shadow-sm">
-                <a class="navbar-brand" href="#">CustomerHub</a>
+                <a class="navbar-brand" href="#">DeliveryHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -69,56 +69,51 @@ if (!$result) {
             </nav>
 
             <!-- Dashboard Content -->
-            <?php
-// require_once 'config/database.php';
-// require_once 'controllers/CustomerController.php';
-// require_once 'controllers/OrderController.php';
-// require_once 'controllers/InventoryController.php';
+            <div class="container mt-4">
+                <h1 class="mb-4">Water Management Dashboard</h1>
+                <!-- Add New Record Button -->
 
-// $customerController = new CustomerController($conn);
-// $orderController = new OrderController($conn);
-// $inventoryController = new InventoryController($conn);
-
-$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
-
-
-switch ($page) {
-    case 'dashboard':
-        // $customers = $customerController->index();
-        // $orders = $orderController->index();
-        // $inventory = $inventoryController->index();
-        break;
-    case 'customers':
-        if ($action === 'create') {
-            $customerController->create();
-        } else {
-            $customerController->index();
-        }
-        break;
-    case 'orders':
-        if ($action === 'create') {
-            $orderController->create();
-        } else {
-            $orderController->index();
-        }
-        break;
-    case 'inventory':
-        if ($action === 'update') {
-            $inventoryController->update();
-        } else {
-            $inventoryController->index();
-        }
-        break;
-    default:
-        echo "404 - Page not found";
-        break;
-}
-
-// include 'includes/footer.php';
-?>
-
-
+                <!-- Records Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Order Records</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Water Quantity</th>
+                                    <th>phone</th>
+                                    <th>email</th>
+                                    <th>Delivery Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($result->num_rows > 0) {
+                                    // Display records
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>
+                                            <td>{$row['id']}</td>
+                                            <td>{$row['customer_name']}</td>
+                                            <td>{$row['water_quantity']}</td>
+                                            <td>{$row['delivery_date']}</td>
+                                            <td>{$row['phone']}</td>
+                                            <td>{$row['email']}</td>
+                                            <td>{$row['status']}</td>
+                                           
+                                        </tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6' class='text-center'>No records found. Add a new record to get started!</td></tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

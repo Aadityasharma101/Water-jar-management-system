@@ -29,7 +29,7 @@ if (!$result) {
         <!-- SIDEBAR -->
         <nav class="bg-dark text-white p-3 vh-100 flex-column" style="width: 250px;">
             <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
-                <i class='bx bxs-smile fs-3 me-2'></i> <span>CustomerHub</span>
+                <i class='bx bxs-smile fs-3 me-2'></i> <span>AdminHub</span>
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
@@ -59,7 +59,7 @@ if (!$result) {
         <div class="w-100">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 shadow-sm">
-                <a class="navbar-brand" href="#">CustomerHub</a>
+                <a class="navbar-brand" href="#">AdminHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -69,12 +69,57 @@ if (!$result) {
             </nav>
 
             <!-- Dashboard Content -->
-           
+            <div class="container mt-4">
+                <h1 class="mb-4">Water Management Dashboard</h1>
+                <!-- Add New Record Button -->
 
+                <!-- Records Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Order Records</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Water Quantity</th>
+                                    <th>phone</th>
+                                    <th>email</th>
+                                    <th>Delivery Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($result->num_rows > 0) {
+                                    // Display records
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>
+                                            <td>{$row['id']}</td>
+                                            <td>{$row['customer_name']}</td>
+                                            <td>{$row['water_quantity']}</td>
+                                            <td>{$row['delivery_date']}</td>
+                                            <td>{$row['phone']}</td>
+                                            <td>{$row['email']}</td>
+                                            <td>{$row['status']}</td>
+                                           
+                                        </tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6' class='text-center'>No records found. Add a new record to get started!</td></tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
-            
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

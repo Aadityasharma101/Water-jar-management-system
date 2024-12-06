@@ -37,4 +37,4 @@ A comprehensive web-based application for managing water jar delivery services e
 ### Steps:
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/water-jar-management-system.git
+   git clone https://github.com/Aayushstha1/Water-jar-management-system.git

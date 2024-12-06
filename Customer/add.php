@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['customer_name'];
     $quantity = (int)$_POST['water_quantity']; // Ensure this is an integer
     $date = $_POST['delivery_date'];
-    // $phone = $_POST['phone_no'];
-    // $email = $_POST['email'];
+    $phone = $_POST['phone_no'];
+    $email = $_POST['email'];
 
     // Assuming $10 per unit of water
     $price = $quantity * 10; 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Prepare failed: " . $conn->error); // Debugging step
     }
 
-    $stmt->bind_param("sid",$name, $quantity,  $date);
+    $stmt->bind_param("siisd",$name, $quantity, $phone, $email, $date);
 
     // Execute 
     if ($stmt->execute()) {
@@ -53,6 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3">
                 <label for="water_quantity" class="form-label">Water Quantity</label>
                 <input type="number" class="form-control" id="water_quantity" name="water_quantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">phone</label>
+                <input type="number" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="delivery_date" class="form-label">Delivery Date</label>

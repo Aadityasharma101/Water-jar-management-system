@@ -40,17 +40,27 @@
       color: #ffffff;
     }
   
+    footer .social-links {
+      display: flex;
+      gap: 15px;
+    }
+  
     footer .social-links a {
       margin: 0 10px;
       display: inline-block;
+      font-size: 25px;
       color: #ccc;
-      font-size: 20px;
       transition: color 0.3s ease, transform 0.3s ease;
     }
   
     footer .social-links a:hover {
       color: #e0aaff;
       transform: scale(1.1);
+    }
+  
+    /* Change Facebook icon color to white */
+    footer .social-links a.facebook-icon {
+      color: #ffffff; /* White color */
     }
   
     footer .copy {
@@ -85,8 +95,8 @@
       <!-- Contact Section -->
       <div class="column">
         <h3>Contact Us</h3>
-        <p>📍 Address: itahari , sunsari  , itahari, Nepal</p>
-        <p>📞 Phone: <a href="tel:+1234567890">9824099712</a></p>
+        <p>📍 Address: 123 Water Lane, City, Country</p>
+        <p>📞 Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
         <p>📧 Email: <a href="mailto:info@waterjar.com">info@waterjar.com</a></p>
       </div>
   
@@ -94,10 +104,18 @@
       <div class="column">
         <h3>Follow Us</h3>
         <div class="social-links">
-          <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://facebook.com" target="_blank" class="facebook-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
         </div>
       </div>
     </div>

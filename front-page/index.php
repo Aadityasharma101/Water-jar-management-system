@@ -62,8 +62,7 @@
 </head>
 <body>
   <header>
-    <h1>Welcome to the Water-Jar Management System</h1>
-    <p>Manage water jars efficiently for customers, delivery boys, and admin.</p>
+    <link src="../header/header.html">
   </header>
   
   <section>

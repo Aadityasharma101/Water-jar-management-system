@@ -67,10 +67,52 @@
         nav .login-btn:hover {
             background-color: #e6b800;
         }
+
+        /* Front Page Section */
+        .front-page {
+            text-align: center;
+            padding: 50px;
+            background-color: #f1f1f1;
+        }
+
+        .front-page h2 {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .front-page p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .front-page .cta-button {
+            background-color: #ffcc00;
+            padding: 15px 30px;
+            color: #2d3b56;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .front-page .cta-button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Footer Style */
+        footer {
+            background-color: #2d3b56;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header/Navbar Section -->
     <header>
         <div class="logo">
             <h1>Water Management System</h1>
@@ -78,13 +120,25 @@
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><a href="#login" class="login-btn">Login</a></li>
             </ul>
         </nav>
     </header>
+
+    <!-- Front Page Section -->
+    <section class="front-page">
+        <h2>Welcome to the Water Management System</h2>
+        <p>Efficient and sustainable management of water resources for a better tomorrow.</p>
+        <a href="#learn-more" class="cta-button">Learn More</a>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Water Management System. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>

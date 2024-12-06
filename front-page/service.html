@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Water Management System</title> -->
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #2d3b56;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo Styling */
+        header .logo h1 {
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation Styling */
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00; /* Gold hover effect */
+        }
+
+        /* Login Button Styling */
+        nav .login-btn {
+            background-color: #ffcc00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            color: #2d3b56;
+            transition: background-color 0.3s ease;
+        }
+
+        nav .login-btn:hover {
+            background-color: #e6b800;
+        }
+
+        /* Front Page Section */
+        .front-page {
+            text-align: center;
+            padding: 50px;
+            background-color: #f1f1f1;
+        }
+
+        .front-page h2 {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .front-page p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .front-page .cta-button {
+            background-color: #ffcc00;
+            padding: 15px 30px;
+            color: #2d3b56;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .front-page .cta-button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Footer Style */
+        footer {
+            background-color: #2d3b56;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #2d3b56;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .services-section {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #f4f6f9;
+        }
+
+        .services-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .service-item {
+            display: inline-block;
+            width: 270px;
+            background-color: #2d3b56;
+            color: white;
+            padding: 40px 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-item h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .service-item p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .service-item .btn {
+            background-color: #1a2531;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-item .btn:hover {
+            background-color: #2d3b56;
+        }
+
+        /* Additional Services Section */
+        .additional-services {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .additional-service {
+            background-color: #ffffff;
+            color: #2d3b56;
+            padding: 30px;
+            width: 250px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .additional-service h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .additional-service p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .additional-service:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            background-color: #2d3b56;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header/Navbar Section -->
+    <header>
+        <div class="logo">
+            <h1>Water Management System</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="../login/otherlogin.php" class="login-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+        
+    </style>
+</head>
+<body>
+
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <h3>Water Conservation</h3>
+            <p>
+                Our water conservation service helps reduce water usage by optimizing irrigation and water 
+                distribution systems. We implement solutions to minimize wastage while maintaining optimal usage.
+            </p>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+
+        <div class="service-item">
+            <h3>Water Treatment</h3>
+            <p>
+                We provide water treatment solutions that ensure safe, potable water for consumption by filtering 
+                out harmful contaminants, bacteria, and impurities.
+            </p>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+
+        <div class="service-item">
+            <h3>Resource Management</h3>
+            <p>
+                Our resource management services include data-driven monitoring, managing water usage across 
+                industries, agricultural sites, and urban settings, ensuring sustainability and reducing costs.
+            </p>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+
+        <!-- Additional Services Section -->
+        <div class="additional-services">
+            <div class="additional-service">
+                <h4>Leak Detection</h4>
+                <p>
+                    Using advanced sensor technology, we help identify leaks in real-time and notify you instantly, 
+                    preventing unnecessary water wastage and saving costs.
+                </p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+
+            <div class="additional-service">
+                <h4>Water Efficiency Training</h4>
+                <p>
+                    We offer specialized training programs for businesses and communities to optimize water usage 
+                    and implement best practices for water conservation.
+                </p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+
+            <div class="additional-service">
+                <h4>Consultation & System Design</h4>
+                <p>
+                    We provide expert consultation services, helping businesses and municipalities design efficient 
+                    and sustainable water management systems tailored to their unique needs.
+                </p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+
+            <div class="additional-service">
+                <h4>Emergency Response</h4>
+                <p>
+                    Our rapid-response services help manage water-related emergencies such as leaks, floods, and 
+                    contamination incidents, ensuring minimal impact on your operations.
+                </p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Water Management System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

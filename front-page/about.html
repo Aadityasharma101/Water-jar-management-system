@@ -1,0 +1,275 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Water Management System</title>
+        <style>
+            /* Basic Reset */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            /* Header Style */
+            header {
+                background-color: #2d3b56;
+                color: white;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+    
+            /* Logo Styling */
+            header .logo h1 {
+                font-family: 'Arial', sans-serif;
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: 2px;
+            }
+    
+            /* Navigation Styling */
+            nav ul {
+                list-style: none;
+                display: flex;
+            }
+    
+            nav ul li {
+                margin: 0 15px;
+            }
+    
+            nav ul li a {
+                text-decoration: none;
+                color: white;
+                font-family: 'Arial', sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+    
+            nav ul li a:hover {
+                color: #ffcc00; /* Gold hover effect */
+            }
+    
+            /* Login Button Styling */
+            nav .login-btn {
+                background-color: #ffcc00;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-weight: 600;
+                color: #2d3b56;
+                transition: background-color 0.3s ease;
+            }
+    
+            nav .login-btn:hover {
+                background-color: #e6b800;
+            }
+    
+            /* Front Page Section */
+            .front-page {
+                text-align: center;
+                padding: 50px;
+                background-color: #f1f1f1;
+            }
+    
+            .front-page h2 {
+                font-size: 30px;
+                color: #333;
+                margin-bottom: 20px;
+            }
+    
+            .front-page p {
+                font-size: 18px;
+                color: #666;
+                margin-bottom: 30px;
+            }
+    
+            .front-page .cta-button {
+                background-color: #ffcc00;
+                padding: 15px 30px;
+                color: #2d3b56;
+                font-size: 18px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .front-page .cta-button:hover {
+                background-color: #e6b800;
+            }
+    
+            /* Footer Style */
+            footer {
+                background-color: #2d3b56;
+                color: white;
+                padding: 20px;
+                text-align: center;
+            }
+            * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #2d3b56;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #2d3b56, #1a2531);
+            color: white;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .about-section p {
+            font-size: 18px;
+            color: #ddd;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        .about-img {
+            margin-top: 40px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-features {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            background-color: #ffffff;
+            color: #2d3b56;
+            padding: 30px;
+            width: 280px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            background-color: #2d3b56;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 16px;
+        }
+
+
+        </style>
+    </head>
+    <body>
+    
+        <!-- Header/Navbar Section -->
+        <header>
+            <div class="logo">
+                <h1>Water Management System</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#login" class="login-btn">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+    <!-- About Us Section -->
+    <section class="about-section">
+        <h2>About Us</h2>
+        <p>
+            Welcome to the Water Management System, where innovation meets sustainability. Our mission is to provide 
+            cutting-edge solutions for water management, ensuring that this precious resource is used responsibly across 
+            industries, agriculture, and communities. We aim to help users monitor, manage, and conserve water effectively.
+        </p>
+        <p>
+            We believe that through smarter water management, we can reduce waste, promote sustainability, and safeguard 
+            water resources for future generations. Our system leverages real-time data, predictive analytics, and automated 
+            solutions to empower users to make informed decisions on water consumption and conservation.
+        </p>
+        <!-- Add an image (e.g., a relevant water-related image or graph) -->
+        <img src="download.jpg" alt="Water Management" class="about-img">
+
+        <!-- Key Features -->
+        <div class="about-features">
+            <div class="feature-item">
+                <h3>Real-Time Monitoring</h3>
+                <p>Track water usage in real-time and identify trends in consumption with detailed reports and insights.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Automated Alerts</h3>
+                <p>Get instant alerts about any abnormal water usage, leaks, or system malfunctions to prevent wastage.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Water Quality Monitoring</h3>
+                <p>Ensure clean and safe water with constant monitoring of quality parameters such as pH, turbidity, and temperature.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Data-Driven Insights</h3>
+                <p>Make informed decisions using powerful data analytics and forecasting tools to optimize water usage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Water Management System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

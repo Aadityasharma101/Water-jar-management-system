@@ -1,12 +1,34 @@
 <?php
+// Start the session
+session_start();
+
+// Database connection
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
+// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$result = $conn->query("SELECT * FROM water_records");
+// Visitor counter logic
+if (!isset($_SESSION['visited'])) {
+    $_SESSION['visited'] = true;
+    $updateResult = $conn->query("UPDATE visitors SET count = count + 1 WHERE id = 1");
+    if (!$updateResult) {
+        die("Error updating visitor count: " . $conn->error);
+    }
+}
 
+// Fetch total visitors
+$visitorResult = $conn->query("SELECT count FROM visitors WHERE id = 1");
+if ($visitorResult && $visitorResult->num_rows > 0) {
+    $visitorCount = $visitorResult->fetch_assoc()['count'];
+} else {
+    $visitorCount = 0; // Default to 0 if query fails
+}
+
+// Fetch water records
+$result = $conn->query("SELECT * FROM water_records");
 if (!$result) {
     die("Error executing query: " . $conn->error);
 }
@@ -23,11 +45,35 @@ if (!$result) {
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
 
     <title>Water Management Dashboard</title>
+    <style>
+        body {
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text for contrast */
+        }
+        .sidebar {
+            background-color: #343a40; /* Dark sidebar */
+            min-width: 250px;
+        }
+        .card {
+            background-color: #ffffff; /* White background for cards */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .badge-info {
+            background-color: #17a2b8;
+        }
+    </style>
 </head>
 <body>
     <div class="d-flex">
         <!-- SIDEBAR -->
-        <nav class="bg-dark text-white p-3 vh-100 flex-column" style="width: 250px;">
+        <nav class="sidebar text-white p-3 vh-100">
             <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
                 <i class='bx bxs-smile fs-3 me-2'></i> <span>CustomerHub</span>
             </a>
@@ -70,24 +116,28 @@ if (!$result) {
 
             <!-- Dashboard Content -->
             <div class="container mt-4">
-                <h1 class="mb-4">Water Management Dashboard</h1>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1>Water Management Dashboard</h1>
+                  
+                </div>
+
                 <!-- Add New Record Button -->
                 <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
 
                 <!-- Records Table -->
-                <div class="card">
-                    <div class="card-header">
+                <div class="card p-3">
+                    <div class="card-header bg-dark text-white">
                         <h3>Records</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
-                            <thead>
+                            <thead class="table-dark">
                                 <tr>
                                     <th>ID</th>
                                     <th>Customer Name</th>
                                     <th>Water Quantity</th>
-                                    <th>phone</th>
-                                    <th>email</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Delivery Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -96,15 +146,14 @@ if (!$result) {
                             <tbody>
                                 <?php
                                 if ($result->num_rows > 0) {
-                                    // Display records
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>
                                             <td>{$row['id']}</td>
                                             <td>{$row['customer_name']}</td>
                                             <td>{$row['water_quantity']}</td>
-                                            <td>{$row['delivery_date']}</td>
                                             <td>{$row['phone']}</td>
                                             <td>{$row['email']}</td>
+                                            <td>{$row['delivery_date']}</td>
                                             <td>{$row['status']}</td>
                                             <td>
                                                 <a href='edit.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
@@ -113,7 +162,7 @@ if (!$result) {
                                         </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='6' class='text-center'>No records found. Add a new record to get started!</td></tr>";
+                                    echo "<tr><td colspan='8' class='text-center'>No records found. Add a new record to get started!</td></tr>";
                                 }
                                 ?>
                             </tbody>

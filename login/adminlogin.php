@@ -4,11 +4,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    //  (replace with database validation)
     if ($username === 'Aayush stha' && $password === 'aayush12345') {
-        // Redirect to dashboard.php on successful login
-        header('Location: Customer/logout/dashboard/dashboard.php');
-        exit(); // Stop further script execution
+      header('Location: Customer/logout/dashboard/dashboard.php');
+        exit(); 
     } else {
         $error = 'Invalid username or password.';
     }

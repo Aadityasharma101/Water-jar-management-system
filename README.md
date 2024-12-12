@@ -2,9 +2,9 @@
 
 A comprehensive web-based application for managing water jar delivery services efficiently. This project is built using **HTML**, **CSS**, **JavaScript**, **PHP**, and **MySQL**. It is designed to streamline operations for customers, delivery personnel, and administrators.
 
-## 📌 Features
+##  Features
 
-### 🔑 Roles & Functionalities
+### Roles & Functionalities
 1. **Admin Dashboard**:
    - Manage customers and delivery personnel (CRUD operations).
    - Track order statuses and delivery schedules.

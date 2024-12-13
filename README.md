@@ -71,7 +71,7 @@ We welcome contributions from developers! Follow these steps to contribute:
 1. Fork the Repository: Click the fork button on GitHub to create your copy of the repository.
 
 2. Clone the Repository:
-git clone https://github.com/YourUsername/Water-Jar-Management-System.git
+git clone: https://github.com/Aayushstha1/Water-jar-management-system.git
 
 
    

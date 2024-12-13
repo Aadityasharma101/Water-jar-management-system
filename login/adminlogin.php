@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     if ($username === 'Aayush stha' && $password === 'aayush12345') {
-      header('Location: Customer/logout/dashboard/dashboard.php');
+      header('Location: ./admin/dashboard.php');
         exit(); 
     } else {
         $error = 'Invalid username or password.';

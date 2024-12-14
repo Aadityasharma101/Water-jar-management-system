@@ -10,22 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Visitor counter logic
-if (!isset($_SESSION['visited'])) {
-    $_SESSION['visited'] = true;
-    $updateResult = $conn->query("UPDATE visitors SET count = count + 1 WHERE id = 1");
-    if (!$updateResult) {
-        die("Error updating visitor count: " . $conn->error);
-    }
-}
 
-// Fetch total visitors
-$visitorResult = $conn->query("SELECT count FROM visitors WHERE id = 1");
-if ($visitorResult && $visitorResult->num_rows > 0) {
-    $visitorCount = $visitorResult->fetch_assoc()['count'];
-} else {
-    $visitorCount = 0; // Default to 0 if query fails
-}
 
 // Fetch water records
 $result = $conn->query("SELECT * FROM water_records");

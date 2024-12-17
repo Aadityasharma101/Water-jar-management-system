@@ -1,15 +1,25 @@
-<?php
+<!-- <?php
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+<<<<<<< HEAD
     // if ($username === 'Aayush stha' && $password === 'aayush12345') {
     //   header('Location: ./admin/dashboard.php');
     //     exit(); 
     // } else {
     //     $error = 'Invalid username or password.';
     // }
+=======
+    if ($username === 'Aayush stha' && $password === 'aayush12345') {
+      // header('Location: ./admin/dashboard.php');
+      header('Location : ../admin/dashbord.php');
+        exit(); 
+    } else {
+        $error = 'Invalid username or password.';
+    }
+>>>>>>> 9ffbb4d4f972815ec4656b0be4dcfdf40c9ac250
 }
 ?>
 <!-- <!DOCTYPE html>
@@ -92,4 +102,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
   </div>
 </body>
-</html>
+</html> -->

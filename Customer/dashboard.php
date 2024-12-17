@@ -1,19 +1,13 @@
-<?php
-// Start the session
-session_start();
 
-// Database connection
+<?php
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
-// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-
-// Fetch water records
 $result = $conn->query("SELECT * FROM water_records");
+
 if (!$result) {
     die("Error executing query: " . $conn->error);
 }
@@ -32,35 +26,49 @@ if (!$result) {
     <title>Water Management Dashboard</title>
     <style>
         body {
-            background-color: #ffffff; /* White background */
-            color: #000000; /* Black text for contrast */
+            background-color: #f4f6f9;
         }
-        .sidebar {
-            background-color: #343a40; /* Dark sidebar */
-            min-width: 250px;
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar a {
+            color: #fff;
         }
         .card {
-            background-color: #ffffff; /* White background for cards */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+        .table thead {
+            background-color: #f1f1f1;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
         }
         .btn-primary {
             background-color: #007bff;
-            border: none;
         }
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .sidebar {
+            background-color: #343a40;
+            height: 100vh;
+            padding-top: 20px;
         }
-        .badge-info {
-            background-color: #17a2b8;
+        .sidebar a {
+            color: white;
+        }
+        .sidebar a:hover {
+            background-color: #007bff;
         }
     </style>
 </head>
 <body>
     <div class="d-flex">
         <!-- SIDEBAR -->
-        <nav class="sidebar text-white p-3 vh-100">
+        <nav class="sidebar p-3 flex-column">
             <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
-                <i class='bx bxs-smile fs-3 me-2'></i> <span>CustomerHub</span>
+                <i class='bx bxs-smile fs-3 me-2'></i> <span>AdminHub</span>
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
@@ -69,7 +77,7 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="logout/messeges/messege.php" class="nav-link text-white">
+                    <a href="logout/messages/message.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Messages
                     </a>
                 </li>
@@ -89,34 +97,33 @@ if (!$result) {
         <!-- MAIN CONTENT -->
         <div class="w-100">
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 shadow-sm">
-                <a class="navbar-brand" href="#">CustomerHub</a>
+            <nav class="navbar navbar-expand-lg navbar-light px-4 shadow-sm">
+                <a class="navbar-brand text-white" href="#">AdminHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-light" type="submit">Search</button>
                     </form>
                 </div>
             </nav>
 
             <!-- Dashboard Content -->
             <div class="container mt-4">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1>Water Management Dashboard</h1>
-                  
-                </div>
+                <h1 class="mb-4">Water Management Dashboard</h1>
 
                 <!-- Add New Record Button -->
-                <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
+                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRecordModal">
+                    Add New Record
+                </button>
 
                 <!-- Records Table -->
-                <div class="card p-3">
-                    <div class="card-header bg-dark text-white">
-                        <h3>Records</h3>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Order Records</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead class="table-dark">
+                        <table class="table table-bordered table-hover">
+                            <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Customer Name</th>
@@ -131,23 +138,23 @@ if (!$result) {
                             <tbody>
                                 <?php
                                 if ($result->num_rows > 0) {
+                                    // Display records
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>
                                             <td>{$row['id']}</td>
                                             <td>{$row['customer_name']}</td>
                                             <td>{$row['water_quantity']}</td>
-                                            <td>{$row['phone']}</td>
-                                            <td>{$row['email']}</td>
+                                            
                                             <td>{$row['delivery_date']}</td>
                                             <td>{$row['status']}</td>
                                             <td>
-                                                <a href='edit.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
-                                                <a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm'>Delete</a>
+                                                <button class='btn btn-info btn-sm'>Edit</button>
+                                                <button class='btn btn-danger btn-sm'>Delete</button>
                                             </td>
                                         </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='8' class='text-center'>No records found. Add a new record to get started!</td></tr>";
+                                    echo "<tr><td colspan='8' class='text-center'>No records found.</td></tr>";
                                 }
                                 ?>
                             </tbody>
@@ -158,6 +165,51 @@ if (!$result) {
         </div>
     </div>
 
+    <!-- Modal to Add New Record -->
+    <div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRecordModalLabel">Add New Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="add_record.php" method="POST">
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="customerName" name="customer_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="waterQuantity" class="form-label">Water Quantity</label>
+                            <input type="number" class="form-control" id="waterQuantity" name="water_quantity" required>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="deliveryDate" class="form-label">Delivery Date</label>
+                            <input type="date" class="form-control" id="deliveryDate" name="delivery_date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="Pending">Pending</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Record</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS  This is the bootstrap js  it is very important-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

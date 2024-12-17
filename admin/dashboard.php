@@ -1,30 +1,12 @@
 <?php
-session_start(); // Start the session for CSRF protection
-
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
+// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get total customers (unique)
-$customerQuery = "SELECT COUNT(DISTINCT customer_name) as total_customers FROM water_records";
-$customerResult = $conn->query($customerQuery);
-$totalCustomers = $customerResult->fetch_assoc()['total_customers'];
-
-// Get total water quantity
-$quantityQuery = "SELECT SUM(water_quantity) as total_quantity FROM water_records";
-$quantityResult = $conn->query($quantityQuery);
-$totalQuantity = $quantityResult->fetch_assoc()['total_quantity'];
-
-$stmt = $conn->prepare("SELECT * FROM water_records");
-if (!$stmt) {
-    die("Prepare failed: " . $conn->error);
-}
-if (!$stmt->execute()) {
-    die("Execute failed: " . $stmt->error);
-}
-$result = $stmt->get_result();
+$result = $conn->query("SELECT * FROM water_records");
 
 if (!$result) {
     die("Error executing query: " . $conn->error);
@@ -44,40 +26,26 @@ if (!$result) {
     <title>Water Management Dashboard</title>
     <style>
         body {
-            background-color: #f4f6f9;
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text for contrast */
         }
-        .navbar {
-            background-color: #007bff;
-        }
-        .navbar a {
-            color: #fff;
+        .sidebar {
+            background-color: #343a40; /* Dark sidebar */
+            min-width: 250px;
         }
         .card {
-            border-radius: 10px;
-        }
-        .card-header {
-            background-color: #007bff;
-            color: white;
-        }
-        .table thead {
-            background-color: #f1f1f1;
-        }
-        .table-hover tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #ffffff; /* White background for cards */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
         .btn-primary {
             background-color: #007bff;
+            border: none;
         }
-        .sidebar {
-            background-color: #343a40;
-            height: 100vh;
-            padding-top: 20px;
+        .btn-primary:hover {
+            background-color: #0056b3;
         }
-        .sidebar a {
-            color: white;
-        }
-        .sidebar a:hover {
-            background-color: #007bff;
+        .badge-info {
+            background-color: #17a2b8;
         }
     </style>
 </head>
@@ -85,9 +53,9 @@ if (!$result) {
     
     <div class="d-flex">
         <!-- SIDEBAR -->
-        <nav class="sidebar p-3 flex-column">
+        <nav class="sidebar text-white p-3 vh-100">
             <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
-                <i class='bx bxs-smile fs-3 me-2'></i> <span>AdminHub</span>
+                <i class='bx bxs-smile fs-3 me-2'></i> <span>CustomerHub</span>
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
@@ -96,7 +64,7 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="logout/messages/message.php" class="nav-link text-white">
+                    <a href="logout/messeges/messege.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Messages
                     </a>
                 </li>
@@ -116,12 +84,12 @@ if (!$result) {
         <!-- MAIN CONTENT -->
         <div class="w-100">
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light px-4 shadow-sm">
-                <a class="navbar-brand text-white" href="#">AdminHub</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 shadow-sm">
+                <a class="navbar-brand" href="#">CustomerHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
+                        <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </nav>
@@ -130,39 +98,17 @@ if (!$result) {
             <div class="container mt-4">
                 <h1 class="mb-4">Water Management Dashboard</h1>
 
-                <!-- Stats Cards -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Customers</h5>
-                                <p class="card-text h2"><?php echo $totalCustomers; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Water Jars</h5>
-                                <p class="card-text h2"><?php echo $totalQuantity; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Add New Record Button -->
-                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRecordModal">
-                    Add New Record
-                </button>
+                <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
 
                 <!-- Records Table -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Order Records</h3>
+                <div class="card p-3">
+                    <div class="card-header bg-dark text-white">
+                        <h3>Records</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-hover">
-                            <thead>
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
                                 <tr>
                                     <th>ID</th>
                                     <th>Customer Name</th>
@@ -177,7 +123,6 @@ if (!$result) {
                             <tbody>
                                 <?php
                                 if ($result->num_rows > 0) {
-                                    // Display records
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>
                                             <td>{$row['id']}</td>
@@ -188,13 +133,13 @@ if (!$result) {
                                             <td>" . htmlspecialchars($row['delivery_date']) . "</td>
                                             <td>" . htmlspecialchars($row['status'] ?? 'Pending') . "</td>
                                             <td>
-                                                <a href='edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>Edit</a>
-                                                <a href='delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\");'>Delete</a>
+                                                <button class='btn btn-info btn-sm'>Edit</button>
+                                                <button class='btn btn-danger btn-sm'>Delete</button>
                                             </td>
                                         </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='8' class='text-center'>No records found.</td></tr>";
+                                    echo "<tr><td colspan='8' class='text-center'>No records found. Add a new record to get started!</td></tr>";
                                 }
                                 ?>
                             </tbody>
@@ -215,7 +160,6 @@ if (!$result) {
                 </div>
                 <div class="modal-body">
                     <form action="add_record.php" method="POST">
-                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(session_id()); ?>">
                         <div class="mb-3">
                             <label for="customerName" class="form-label">Customer Name</label>
                             <input type="text" class="form-control" id="customerName" name="customer_name" required>

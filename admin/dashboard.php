@@ -1,8 +1,4 @@
 <?php
-// Start the session
-session_start();
-
-// Database connection
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
 // Check the connection
@@ -10,10 +6,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-
-// Fetch water records
 $result = $conn->query("SELECT * FROM water_records");
+
 if (!$result) {
     die("Error executing query: " . $conn->error);
 }
@@ -56,6 +50,7 @@ if (!$result) {
     </style>
 </head>
 <body>
+    
     <div class="d-flex">
         <!-- SIDEBAR -->
         <nav class="sidebar text-white p-3 vh-100">
@@ -101,10 +96,7 @@ if (!$result) {
 
             <!-- Dashboard Content -->
             <div class="container mt-4">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1>Water Management Dashboard</h1>
-                  
-                </div>
+                <h1 class="mb-4">Water Management Dashboard</h1>
 
                 <!-- Add New Record Button -->
                 <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
@@ -134,15 +126,15 @@ if (!$result) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>
                                             <td>{$row['id']}</td>
-                                            <td>{$row['customer_name']}</td>
-                                            <td>{$row['water_quantity']}</td>
-                                            <td>{$row['phone']}</td>
-                                            <td>{$row['email']}</td>
-                                            <td>{$row['delivery_date']}</td>
-                                            <td>{$row['status']}</td>
+                                            <td>" . htmlspecialchars($row['customer_name']) . "</td>
+                                            <td>" . htmlspecialchars($row['water_quantity']) . "</td>
+                                            <td>" . htmlspecialchars($row['phone']) . "</td>
+                                            <td>" . htmlspecialchars($row['email']) . "</td>
+                                            <td>" . htmlspecialchars($row['delivery_date']) . "</td>
+                                            <td>" . htmlspecialchars($row['status'] ?? 'Pending') . "</td>
                                             <td>
-                                                <a href='edit.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
-                                                <a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm'>Delete</a>
+                                                <button class='btn btn-info btn-sm'>Edit</button>
+                                                <button class='btn btn-danger btn-sm'>Delete</button>
                                             </td>
                                         </tr>";
                                     }
@@ -158,10 +150,57 @@ if (!$result) {
         </div>
     </div>
 
+    <!-- Modal to Add New Record -->
+    <div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRecordModalLabel">Add New Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="add_record.php" method="POST">
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="customerName" name="customer_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="waterQuantity" class="form-label">Water Quantity</label>
+                            <input type="number" class="form-control" id="waterQuantity" name="water_quantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deliveryDate" class="form-label">Delivery Date</label>
+                            <input type="date" class="form-control" id="deliveryDate" name="delivery_date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="Pending">Pending</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Record</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS  This is the bootstrap js  it is very important-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
 <?php
+$stmt->close();
 $conn->close();
 ?>
+

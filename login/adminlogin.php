@@ -4,6 +4,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+<<<<<<< HEAD
+    // if ($username === 'Aayush stha' && $password === 'aayush12345') {
+    //   header('Location: ./admin/dashboard.php');
+    //     exit(); 
+    // } else {
+    //     $error = 'Invalid username or password.';
+    // }
+=======
     if ($username === 'Aayush stha' && $password === 'aayush12345') {
       // header('Location: ./admin/dashboard.php');
       header('Location : ../admin/dashbord.php');
@@ -11,15 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $error = 'Invalid username or password.';
     }
+>>>>>>> 9ffbb4d4f972815ec4656b0be4dcfdf40c9ac250
 }
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
-  <style>
+  <style> -->
     body {
       display: flex;
       justify-content: center;

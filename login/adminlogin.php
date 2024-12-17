@@ -1,11 +1,12 @@
-<?php
+<!-- <?php
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     if ($username === 'Aayush stha' && $password === 'aayush12345') {
-      header('Location: ./admin/dashboard.php');
+      // header('Location: ./admin/dashboard.php');
+      header('Location : ../admin/dashbord.php');
         exit(); 
     } else {
         $error = 'Invalid username or password.';
@@ -92,4 +93,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
   </div>
 </body>
-</html>
+</html> -->

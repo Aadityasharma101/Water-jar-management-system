@@ -27,7 +27,7 @@ $newOrders = $orderCountResult->fetch_assoc()['new_orders'];
 
 // Calculate Total Sales
 $totalSalesResult = $conn->query("SELECT SUM(price) AS total_sales FROM water_records");
-$totalSales = $totalSalesResult->fetch_assoc()['total_sales'] ?? 0; // Default to 0 if no records exist
+// $totalSales = $totalSalesResult->fetch_assoc()['total_sales'] ?? 0; // Default to 0 if no records exist
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ $totalSales = $totalSalesResult->fetch_assoc()['total_sales'] ?? 0; // Default t
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title">Total Sales</h5>
-                        <h2>$<?= number_format($totalSales, 2) ?></h2>
+                        <!-- <h2>$<?= number_format($totalSales, 2) ?></h2> -->
                     </div>
                 </div>
             </div>

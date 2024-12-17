@@ -6,13 +6,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST['role'];
 
     if ($username == "admin" && $password == "admin123" && $role == "admin") {
-        header("Location: admin_dashboard.php"); 
+        header("Location: ../admin/dashboard.php"); 
         exit();
-    } elseif ($username == "delivery" && $password == "delivery123" && $role == "delivery-boy") {
-        header("Location: delivery_dashboard.php"); 
+    } elseif ($username == "" && $password == "" && $role == "delivery-boy") {
+        header("Location: "); 
         exit();
-    } elseif ($username == "customer" && $password == "customer123" && $role == "customer") {
-        header("Location: customer_dashboard.php");
+    } elseif ($username == "" && $password == "" && $role == "customer") {
+        header("Location: ");
         exit();
     } else {
         $error_message = "Invalid credentials or role. Please try again.";

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($username == "admin" && $password == "admin123" && $role == "admin") {
         header("Location: ../admin/dashboard.php"); 
         exit();
-    } elseif ($username == "" && $password == "" && $role == "delivery-boy") {
+    } elseif ($username == "deliveryboy" && $password == "123" && $role == "delivery-boy") {
         header("Location: ");
         exit();
     } elseif ($username == "customer" && $password == "123" && $role == "customer") {

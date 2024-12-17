@@ -1,6 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
+    // print_r($_POST);die;
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = $_POST['role'];
@@ -9,10 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../admin/dashboard.php"); 
         exit();
     } elseif ($username == "" && $password == "" && $role == "delivery-boy") {
-        header("Location: "); 
-        exit();
-    } elseif ($username == "" && $password == "" && $role == "customer") {
         header("Location: ");
+        exit();
+    } elseif ($username == "customer" && $password == "123" && $role == "customer") {
+        header("Location: ../Customer/dashboard.php");
         exit();
     } else {
         $error_message = "Invalid credentials or role. Please try again.";
@@ -102,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select class="form-select" id="role" name="role" required>
                         <option value="customer">Customer</option>
                         <option value="delivery-boy">Delivery Boy</option>
-                        <option value="delivery-boy">Admin</option>
+                        <option value="admin">Admin</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-custom">Login</button>

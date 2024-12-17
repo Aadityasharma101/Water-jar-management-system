@@ -81,4 +81,3 @@ git clone: https://github.com/Aayushstha1/Water-jar-management-system.git
 
 
    
->>>>>>> 698816082db3d77b41a529c1a93c1419bedbd72f

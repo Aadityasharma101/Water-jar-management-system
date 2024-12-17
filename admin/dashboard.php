@@ -1,11 +1,30 @@
 <?php
+session_start(); // Start the session for CSRF protection
+
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$result = $conn->query("SELECT * FROM water_records");
+// Get total customers (unique)
+$customerQuery = "SELECT COUNT(DISTINCT customer_name) as total_customers FROM water_records";
+$customerResult = $conn->query($customerQuery);
+$totalCustomers = $customerResult->fetch_assoc()['total_customers'];
+
+// Get total water quantity
+$quantityQuery = "SELECT SUM(water_quantity) as total_quantity FROM water_records";
+$quantityResult = $conn->query($quantityQuery);
+$totalQuantity = $quantityResult->fetch_assoc()['total_quantity'];
+
+$stmt = $conn->prepare("SELECT * FROM water_records");
+if (!$stmt) {
+    die("Prepare failed: " . $conn->error);
+}
+if (!$stmt->execute()) {
+    die("Execute failed: " . $stmt->error);
+}
+$result = $stmt->get_result();
 
 if (!$result) {
     die("Error executing query: " . $conn->error);
@@ -63,6 +82,7 @@ if (!$result) {
     </style>
 </head>
 <body>
+    
     <div class="d-flex">
         <!-- SIDEBAR -->
         <nav class="sidebar p-3 flex-column">
@@ -110,6 +130,26 @@ if (!$result) {
             <div class="container mt-4">
                 <h1 class="mb-4">Water Management Dashboard</h1>
 
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Customers</h5>
+                                <p class="card-text h2"><?php echo $totalCustomers; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Water Jars</h5>
+                                <p class="card-text h2"><?php echo $totalQuantity; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Add New Record Button -->
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRecordModal">
                     Add New Record
@@ -141,15 +181,15 @@ if (!$result) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>
                                             <td>{$row['id']}</td>
-                                            <td>{$row['customer_name']}</td>
-                                            <td>{$row['water_quantity']}</td>
-                                            <td>{$row['phone']}</td>
-                                            <td>{$row['email']}</td>
-                                            <td>{$row['delivery_date']}</td>
-                                            <td>{$row['status']}</td>
+                                            <td>" . htmlspecialchars($row['customer_name']) . "</td>
+                                            <td>" . htmlspecialchars($row['water_quantity']) . "</td>
+                                            <td>" . htmlspecialchars($row['phone']) . "</td>
+                                            <td>" . htmlspecialchars($row['email']) . "</td>
+                                            <td>" . htmlspecialchars($row['delivery_date']) . "</td>
+                                            <td>" . htmlspecialchars($row['status'] ?? 'Pending') . "</td>
                                             <td>
-                                                <button class='btn btn-info btn-sm'>Edit</button>
-                                                <button class='btn btn-danger btn-sm'>Delete</button>
+                                                <a href='edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>Edit</a>
+                                                <a href='delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\");'>Delete</a>
                                             </td>
                                         </tr>";
                                     }
@@ -175,6 +215,7 @@ if (!$result) {
                 </div>
                 <div class="modal-body">
                     <form action="add_record.php" method="POST">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(session_id()); ?>">
                         <div class="mb-3">
                             <label for="customerName" class="form-label">Customer Name</label>
                             <input type="text" class="form-control" id="customerName" name="customer_name" required>
@@ -215,5 +256,7 @@ if (!$result) {
 </html>
 
 <?php
+$stmt->close();
 $conn->close();
 ?>
+

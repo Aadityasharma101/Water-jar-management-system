@@ -5,11 +5,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    if ($username == "admin" && $password == "admin123" && $role == "admin") {
-        header("Location: admin_dashboard.php"); 
+    if ($username == "admin12" && $password == "admin122" && $role == "admin") {
+        header("Location: ./admin/dashboard.php"); 
         exit();
     } elseif ($username == "delivery" && $password == "delivery123" && $role == "delivery-boy") {
-        header("Location: delivery_dashboard.php"); 
+        header("Location: "); 
         exit();
     } elseif ($username == "customer" && $password == "customer123" && $role == "customer") {
         header("Location: customer_dashboard.php");
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select class="form-select" id="role" name="role" required>
                         <option value="customer">Customer</option>
                         <option value="delivery-boy">Delivery Boy</option>
-                        <option value="delivery-boy">Admin</option>
+                        <option value="admin">Admin</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-custom">Login</button>

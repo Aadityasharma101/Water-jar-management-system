@@ -28,7 +28,7 @@ A comprehensive web-based application for managing water jar delivery services e
 
 ---
 
-## 🎯 How to Run the Project
+##  How to Run the Project
 
 ### Prerequisites:
 - XAMPP/WAMP server

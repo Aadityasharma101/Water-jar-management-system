@@ -72,12 +72,12 @@ if (!$result) {
     <div class="d-flex">
         <!-- SIDEBAR -->
         <nav class="sidebar p-3 flex-column">
-            <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
+            <a href="dashboard.php" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
                 <i class='bx bxs-smile fs-3 me-2'></i> <span>AdminHub</span>
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
-                    <a href="logout/dashboard/dashboard.php" class="nav-link text-white active">
+                    <a href="dashboard.php" class="nav-link text-white active">
                         <i class='bx bxs-dashboard'></i> Dashboard
                     </a>
                 </li>
@@ -92,7 +92,7 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout/logout.php" class="nav-link text-white">
+                    <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout
                     </a>
                 </li>

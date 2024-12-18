@@ -230,7 +230,6 @@ if (!$result) {
                                 <option value="Delivered">Delivered</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Record</button>
                     </form>
                 </div>
             </div>

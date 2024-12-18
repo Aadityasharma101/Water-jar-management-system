@@ -34,15 +34,6 @@ The **Water Jar Management System** is a web-based application designed to effic
 
 ---
 
-## **How to Run the Project**
-
-### **Prerequisites**
-- **XAMPP/WAMP**: A local server environment for running PHP and MySQL.
-- **Web Browser**: Any modern browser like Google Chrome or Mozilla Firefox.
-
-### **Set Up the Server**
-1. **Start Local Server**: Open XAMPP/WAMP and start the **Apache** and **MySQL** services.
-2. **Add Project Files**: Navigate to the `htdocs` folder in XAMPP or the `www` folder in WAMP and place the cloned project folder there.
 
 ### **Database Setup**
 1. Open **phpMyAdmin** and create a new database named `water_jar_management`.
@@ -71,13 +62,3 @@ We welcome contributions from developers! Follow these steps to contribute:
 1. Fork the Repository: Click the fork button on GitHub to create your copy of the repository.
 
 2. Clone the Repository:
-<<<<<<< HEAD
-git clone https://github.com/YourUsername/Water-Jar-Management-System.git
-
-
-   
-=======
-git clone: https://github.com/Aayushstha1/Water-jar-management-system.git
-
-
-   

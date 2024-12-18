@@ -126,7 +126,7 @@ if (!$result) {
                             </div>
                             <div class="card-body text-center">
                                 <h2 class="display-4 mb-0"><?php echo $totalCustomers; ?></h2>
-                                <p class="text-muted mt-2">Unique Customers</p>
+                                <p class="text-muted mt-2">Total Customers</p>
                             </div>
                         </div>
                     </div>
@@ -143,10 +143,7 @@ if (!$result) {
                     </div>
                 </div>
 
-                <!-- Add New Record Button -->
-                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRecordModal">
-                    Add New Record
-                </button>
+              
 
                 <!-- Records Table -->
                 <div class="card">

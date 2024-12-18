@@ -1,19 +1,19 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
+    // print_r($_POST);die;
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    // Example of simple validation (in a real-world app, you'd query a database)
     if ($username == "admin" && $password == "admin123" && $role == "admin") {
-        header("Location: admin_dashboard.php"); // Redirect to Admin Dashboard
+        header("Location: admin_dashboard.php"); 
         exit();
-    } elseif ($username == "delivery" && $password == "delivery123" && $role == "delivery-boy") {
-        header("Location: delivery_dashboard.php"); // Redirect to Delivery Boy Dashboard
+    } elseif ($username == "" && $password == "" && $role == "delivery-boy") {
+        header("Location: ");
         exit();
-    } elseif ($username == "customer" && $password == "customer123" && $role == "customer") {
-        header("Location: customer_dashboard.php"); // Redirect to Customer Dashboard
+    } elseif ($username == "customer" && $password == "123" && $role == "customer") {
+        header("Location: ../Customer/dashboard.php");
         exit();
     } else {
         $error_message = "Invalid credentials or role. Please try again.";
@@ -103,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select class="form-select" id="role" name="role" required>
                         <option value="customer">Customer</option>
                         <option value="delivery-boy">Delivery Boy</option>
+                        <option value="admin">Admin</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-custom">Login</button>
@@ -117,4 +118,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 </html>
 
- 

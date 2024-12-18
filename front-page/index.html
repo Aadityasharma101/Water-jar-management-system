@@ -5,17 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water Management System</title>
     <style>
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
-        /* Header Style */
+        :root {
+            --primary-color: #2d3b56;
+            --secondary-color: #ffcc00;
+            --accent-color: #445173;
+            --text-light: #fff;
+            --text-dark: #333;
+            --text-muted: #666;
+            --background-light: #f9fafc;
+            --gradient: linear-gradient(135deg, #2d3b56, #445173);
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-light);
+            line-height: 1.6;
+        }
+
+        /* Header Section */
         header {
-            background-color: #2d3b56;
-            color: white;
+            background: var(--primary-color);
+            color: var(--text-light);
             padding: 20px;
             display: flex;
             justify-content: space-between;
@@ -23,15 +41,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Logo Styling */
         header .logo h1 {
-            font-family: 'Arial', sans-serif;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            letter-spacing: 2px;
         }
 
-        /* Navigation Styling */
         nav ul {
             list-style: none;
             display: flex;
@@ -43,24 +57,35 @@
 
         nav ul li a {
             text-decoration: none;
-            color: white;
-            font-family: 'Arial', sans-serif;
+            color: var(--text-light);
             font-size: 16px;
             font-weight: 500;
+            position: relative;
             transition: color 0.3s ease;
         }
 
-        nav ul li a:hover {
-            color: #ffcc00; /* Gold hover effect */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            left: 50%;
+            bottom: -5px;
+            transition: width 0.3s ease, left 0.3s ease;
         }
 
-        /* Login Button Styling */
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
         nav .login-btn {
-            background-color: #ffcc00;
+            background-color: var(--secondary-color);
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 20px;
             font-weight: 600;
-            color: #2d3b56;
+            color: var(--primary-color);
             transition: background-color 0.3s ease;
         }
 
@@ -71,59 +96,122 @@
         /* Front Page Section */
         .front-page {
             text-align: center;
-            padding: 50px;
-            background-color: #f1f1f1;
+            padding: 100px 20px;
+            background: var(--gradient);
+            color: var(--text-light);
         }
 
         .front-page h2 {
-            font-size: 30px;
-            color: #333;
+            font-size: 36px;
             margin-bottom: 20px;
         }
 
         .front-page p {
             font-size: 18px;
-            color: #666;
             margin-bottom: 30px;
+            line-height: 1.5;
         }
 
         .front-page .cta-button {
-            background-color: #ffcc00;
+            background-color: var(--secondary-color);
             padding: 15px 30px;
-            color: #2d3b56;
+            color: var(--primary-color);
             font-size: 18px;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .front-page .cta-button:hover {
             background-color: #e6b800;
+            transform: translateY(-3px);
         }
 
-        /* Footer Style */
+        /* Updated Features Section */
+        .content-section {
+            padding: 50px 20px;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .content-section h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .content-section .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .content-section .feature {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .content-section .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-section .feature h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .content-section .feature p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Footer Section */
         footer {
-            background-color: #2d3b56;
-            color: white;
+            background: var(--primary-color);
+            color: var(--text-light);
             padding: 20px;
             text-align: center;
         }
+
+        footer .social-icons a {
+            margin: 0 10px;
+            color: var(--text-light);
+            font-size: 20px;
+        }
+
+        footer .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+       
     </style>
 </head>
 <body>
-
     <!-- Header/Navbar Section -->
     <header>
         <div class="logo">
-            <h1>Water Management System</h1>
+            <h1>Water Management</h1>
         </div>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="service.html">Services</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="#login" class="login-btn">Login</a></li>
+                <li><a href="../login/otherlogin.php" class="login-btn">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -135,10 +223,85 @@
         <a href="#learn-more" class="cta-button">Learn More</a>
     </section>
 
+    <section class="content-section">
+        <h3>Why Choose Us?</h3>
+        <p style="font-size: 20px; color: var(--primary-color); margin-bottom: 30px;">
+            We are committed to providing the best water management solutions, combining innovation, sustainability, and efficiency. Our system is designed to meet the highest standards of performance and reliability.
+        </p>
+        <div class="features">
+            <div class="feature">
+                <h4>Cutting-Edge Technology</h4>
+                <p>Our system uses advanced algorithms to optimize water usage, ensuring maximum efficiency while reducing waste.</p>
+            </div>
+            <div class="feature">
+                <h4>Real-Time Monitoring</h4>
+                <p>Get access to live data and track water usage in real-time, empowering you to make informed decisions at any moment.</p>
+            </div>
+            <div class="feature">
+                <h4>Eco-Friendly Initiatives</h4>
+                <p>We help conserve precious water resources by promoting sustainable practices and eco-friendly solutions.</p>
+            </div>
+            <div class="feature">
+                <h4>24/7 Customer Support</h4>
+                <p>Our team is available around the clock to assist with any queries or issues, ensuring uninterrupted service for you.</p>
+            </div>
+            <div class="feature">
+                <h4>Smart Automation</h4>
+                <p>Experience seamless automation of water systems, reducing manual intervention and improving operational efficiency.</p>
+            </div>
+            <div class="feature">
+                <h4>Customizable Solutions</h4>
+                <p>Tailored solutions to fit your unique needs, offering flexibility and scalability as your requirements evolve.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 Water Management System. All rights reserved.</p>
-    </footer>
+    <footer>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; padding: 50px 20px; background: var(--gradient); color: var(--text-light);">
+        <div style="flex: 1; min-width: 250px; margin: 20px;">
+            <h3 style="font-size: 26px; margin-bottom: 20px; color: var(--secondary-color);">Water Management</h3>
+            <p style="font-size: 16px; color: var(--text-light);">Efficient and sustainable water solutions for a better tomorrow. Join us in conserving water resources and creating a greener planet.</p>
+        </div>
+        
+        <div style="flex: 1; min-width: 250px; margin: 20px;">
+            <h4 style="font-size: 22px; margin-bottom: 20px; color: var(--secondary-color);">Quick Links</h4>
+            <ul style="list-style: none; padding: 0; line-height: 2;">
+                <li><a href="#home" style="text-decoration: none; color: var(--text-light); transition: color 0.3s ease;">Home</a></li>
+                <li><a href="about.html" style="text-decoration: none; color: var(--text-light); transition: color 0.3s ease;">About</a></li>
+                <li><a href="service.html" style="text-decoration: none; color: var(--text-light); transition: color 0.3s ease;">Services</a></li>
+                <li><a href="contact.html" style="text-decoration: none; color: var(--text-light); transition: color 0.3s ease;">Contact</a></li>
+                <li><a href="#login" style="text-decoration: none; color: var(--text-light); transition: color 0.3s ease;">Login</a></li>
+            </ul>
+        </div>
 
+        <div style="flex: 1; min-width: 250px; margin: 20px;">
+            <h4 style="font-size: 22px; margin-bottom: 20px; color: var(--secondary-color);">Contact Us</h4>
+            <p style="font-size: 16px; color: var(--text-light); margin-bottom: 10px;">123 Water Street, Cityville</p>
+            <p style="font-size: 16px; color: var(--text-light); margin-bottom: 10px;">Phone: +1 234 567 890</p>
+            <p style="font-size: 16px; color: var(--text-light);">Email: <a href="mailto:support@watermanagement.com" style="color: var(--secondary-color); text-decoration: none;">support@watermanagement.com</a></p>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div style="flex: 1; min-width: 250px; margin: 20px; text-align: center;">
+            <h4 style="font-size: 22px; margin-bottom: 20px; color: var(--secondary-color);">Follow Us</h4>
+            <div class="social-icons" style="font-size: 24px;">
+                <a href="#" style="margin: 0 10px; color: var(--secondary-color); transition: color 0.3s ease;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="margin: 0 10px; color: var(--secondary-color); transition: color 0.3s ease;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="margin: 0 10px; color: var(--secondary-color); transition: color 0.3s ease;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="margin: 0 10px; color: var(--secondary-color); transition: color 0.3s ease;"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div style="background: var(--accent-color); color: var(--text-light); text-align: center; padding: 15px;">
+        <p style="font-size: 16px;">&copy; 2024 Water Management System.All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Add the following to your <head> to use Font Awesome for social media icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    </footer>
 </body>
 </html>

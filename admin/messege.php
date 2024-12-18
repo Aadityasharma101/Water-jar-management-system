@@ -219,7 +219,6 @@ if (!$result) {
         echo "<p class='no-data'>No messages found.</p>";
     }
 
-    // Close the database connection
     $conn->close();
     ?>
 </body>

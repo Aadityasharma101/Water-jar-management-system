@@ -32,14 +32,7 @@ if (!$result) {
 
     <title>Water Management Dashboard</title>
     <style>
-        body {
-<<<<<<< HEAD
-            background-color: #ffffff; 
-            color: #000000; 
-=======
-            background-color: #f4f6f9;
->>>>>>> 64ff20efc42c0e72578fff47d7f2988cee3cebac
-        }
+        
         .navbar {
             background-color: #007bff;
         }
@@ -89,7 +82,7 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="logout/messages/message.php" class="nav-link text-white">
+                    <a href="messege.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Messages
                     </a>
                 </li>

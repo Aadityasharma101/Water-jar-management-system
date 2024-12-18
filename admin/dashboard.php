@@ -26,8 +26,8 @@ if (!$result) {
     <title>Water Management Dashboard</title>
     <style>
         body {
-            background-color: #ffffff; /* White background */
-            color: #000000; /* Black text for contrast */
+            background-color: #ffffff; 
+            color: #000000; 
         }
         .sidebar {
             background-color: #343a40; /* Dark sidebar */

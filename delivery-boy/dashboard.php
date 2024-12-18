@@ -97,6 +97,7 @@ if (!$result) {
                                 if ($result->num_rows > 0) {
                                     // Display records
                                     while ($row = $result->fetch_assoc()) {
+                                        $status = $row['status'] ?? 'Pending';
                                         echo "<tr>
                                             <td>{$row['id']}</td>
                                             <td>{$row['customer_name']}</td>
@@ -104,8 +105,7 @@ if (!$result) {
                                             <td>{$row['delivery_date']}</td>
                                             <td>{$row['phone']}</td>
                                             <td>{$row['email']}</td>
-                                            <td>{$row['status']}</td>
-                                           
+                                            <td>{$status}</td>
                                         </tr>";
                                     }
                                 } else {

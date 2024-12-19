@@ -3,23 +3,19 @@
 session_start();
 
 // Check if the admin is logged in
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header("Location: admin_login.php");
-    exit();
-}
+// if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+//     header("Location: ");
+//     exit();
+// }
 
-// If the form is submitted to confirm logout
 if (isset($_POST['confirm_logout'])) {
-    // Destroy the session to log out
     session_unset();
     session_destroy();
-    header("Location: admin_login.php");
+    header("Location: ../front-page/index.html");
     exit();
 }
 
-// If the form is submitted to cancel logout
 if (isset($_POST['cancel_logout'])) {
-    // Redirect back to the dashboard
     header("Location: dashboard.php");
     exit();
 }
@@ -78,7 +74,7 @@ if (isset($_POST['cancel_logout'])) {
             <p>Are you sure you want to log out?</p>
 
             <form method="POST">
-                <button type="submit" name="confirm_logout" class="btn btn-yes">Yes, Log out</button>
+              <button type="submit" name="confirm_logout" class="btn btn-yes">Yes, Log out</button>
                 <button type="submit" name="cancel_logout" class="btn btn-no">No, Stay Logged In</button>
             </form>
         </div>

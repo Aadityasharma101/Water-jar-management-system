@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST['role'];
 
     if ($username == "admin" && $password == "admin123" && $role == "admin") {
-        header("Location: admin_dashboard.php"); 
+        header("Location: ../admin/dashboard.php"); 
         exit();
     } elseif ($username == "" && $password == "" && $role == "delivery-boy") {
         header("Location: ");

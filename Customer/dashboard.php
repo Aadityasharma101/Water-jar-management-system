@@ -64,8 +64,13 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="logout/messeges/messege.php" class="nav-link text-white">
+                    <a href="../messeges/messege.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Messages
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="feedback.php" class="nav-link text-white">
+                        <i class='bx bxs-message-dots'></i> Feedback
                     </a>
                 </li>
                 <li class="nav-item mb-2">
@@ -74,7 +79,11 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout/logout.php" class="nav-link text-white">
+                    <a href="" class="nav-link text-white">
+                        <i class=''></i> Profile
+                    </a>
+                <li class="nav-item">
+                    <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout
                     </a>
                 </li>

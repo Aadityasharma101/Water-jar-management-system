@@ -87,12 +87,17 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+                    <a href="feedback.php" class="nav-link text-white">
+                        <i class='bx bxs-message-dots'></i> Feedback
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
                     <a href="logout/settings/settings.php" class="nav-link text-white">
                         <i class='bx bxs-cog'></i> Settings
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout/logout.php" class="nav-link text-white">
+                    <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout
                     </a>
                 </li>
@@ -197,10 +202,7 @@ if (!$result) {
     <div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addRecordModalLabel">Add New Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                
                 <div class="modal-body">
                     <form action="add_record.php" method="POST">
                         <div class="mb-3">

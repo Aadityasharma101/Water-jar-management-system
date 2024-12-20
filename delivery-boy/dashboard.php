@@ -87,6 +87,11 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+                    <a href="logout.php" class="nav-link text-white">
+                        <i class='bx bxs-message-dots'></i> logout
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
                     <a href="logout/settings/settings.php" class="nav-link text-white">
                         <i class='bx bxs-cog'></i> Settings
                     </a>

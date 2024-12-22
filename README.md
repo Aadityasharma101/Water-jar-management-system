@@ -3,7 +3,7 @@
 ## **Overview**
 The **Water Jar Management System** is a web-based application designed to efficiently manage the delivery of water jars. This project provides a streamlined process for customers, delivery personnel, and administrators. Built with **HTML**, **CSS**, **JavaScript**, **PHP**, and **MySQL**, it aims to simplify water delivery management for small-to-medium-sized businesses.
 
--
+
 
 ## **Features**
 

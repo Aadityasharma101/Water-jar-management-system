@@ -82,14 +82,11 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="messege.php" class="nav-link text-white">
-                        <i class='bx bxs-message-dots'></i> Messages
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
                     <a href="feedback.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Feedback
                     </a>
+                </li>
+               
                 </li>
                 <li class="nav-item mb-2">
                     <a href="logout/settings/settings.php" class="nav-link text-white">

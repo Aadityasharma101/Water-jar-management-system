@@ -145,7 +145,9 @@
         <!-- Weekly Plan -->
         <div class="card" id="weekly">
             <h2>Weekly</h2>
-            <p class="price">$10/week</p>
+            <p class="price">Rs.1000/week <br>
+            4L/Per Day
+        </p>
             <ul>
                 <li>Full access to orders</li>
                 <li>Priority delivery</li>
@@ -160,7 +162,9 @@
         <!-- Monthly Plan -->
         <div class="card" id="monthly">
             <h2>Monthly</h2>
-            <p class="price">$30/month</p>
+            <p class="price">Rs.3000/month<br>
+                4L/per Day
+            </p>
             <ul>
                 <li>Full access to orders</li>
                 <li>Priority delivery</li>
@@ -175,7 +179,9 @@
         <!-- Yearly Plan -->
         <div class="card" id="yearly">
             <h2>Yearly</h2>
-            <p class="price">$300/year</p>
+            <p class="price">RS.30000/year<br>
+            4L/per
+        </p>
             <ul>
                 <li>Full access to orders</li>
                 <li>Priority delivery</li>

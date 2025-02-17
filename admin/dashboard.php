@@ -86,6 +86,11 @@ if (!$result) {
                         <i class='bx bxs-message-dots'></i> Feedback
                     </a>
                 </li>
+                <li class="nav-item mb-2">
+                    <a href="view-msg.php" class="nav-link text-white">
+                        <i class='bx bxs-message-dots'></i> Messege
+                    </a>
+                </li>
                
                 </li>
                 <li class="nav-item mb-2">

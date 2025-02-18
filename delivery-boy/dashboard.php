@@ -97,7 +97,7 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout/logout.php" class="nav-link text-white">
+                    <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout
                     </a>
                 </li>

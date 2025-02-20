@@ -24,7 +24,7 @@ The **Water Jar Management System** is a web-based application designed to effic
 - Update delivery statuses (pending/delivered).
 - Track delivery progress and completion.
 
----
+-
 
 ## **Technologies Used**
 - **Frontend**: HTML5, CSS3, JavaScript

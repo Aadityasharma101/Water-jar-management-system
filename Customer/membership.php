@@ -172,7 +172,7 @@
             </ul>
             <form method="POST" action="process_payment.php">
                 <input type="hidden" name="plan" value="monthly">
-                <button type="submit">Choose Monthly Plan</button>
+              <a href="payment.php">"  <button type="submit">Choose Monthly Plan</button></a>
             </form>
         </div>
         

@@ -73,7 +73,7 @@ if (!$result) {
         <!-- SIDEBAR -->
         <nav class="sidebar p-3 flex-column">
             <a href="#" class="text-decoration-none text-white mb-4 fs-4 d-flex align-items-center">
-                <i class='bx bxs-smile fs-3 me-2'></i> <span>AdminHub</span>
+                <i class='bx bxs-smile fs-3 me-2'></i> <span>deliveryHub</span>
             </a>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
@@ -105,7 +105,7 @@ if (!$result) {
         <div class="w-100">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light px-4 shadow-sm">
-                <a class="navbar-brand text-white" href="#">AdminHub</a>
+                <a class="navbar-brand text-white" href="#">DeliveryHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

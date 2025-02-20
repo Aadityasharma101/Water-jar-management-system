@@ -29,7 +29,7 @@ The **Water Jar Management System** is a web-based application designed to effic
 ## **Technologies Used**
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Backend**: PHP
-- **Database**: MySQL
+- **Database**: MySQL.
 - **Tools**: XAMPP/WAMP for local server setup
 
 ---

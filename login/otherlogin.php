@@ -1,23 +1,56 @@
 <?php
+session_start();
+$conn = new mysqli('localhost', 'root', '', 'sample');
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
-    // print_r($_POST);die;
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
     $role = $_POST['role'];
 
-    if ($username == "admin" && $password == "admin123" && $role == "admin") {
-        header("Location: ../admin/dashboard.php"); 
-        exit();
-    } elseif ($username == "" && $password == "" && $role == "delivery-boy") {
-        header("Location: ");
-        exit();
-    } elseif ($username == "customer" && $password == "123" && $role == "customer") {
-        header("Location: ../Customer/dashboard.php");
-        exit();
+    // Query the database for the user
+    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        
+        // Verify password and role
+        if (password_verify($password, $user['password']) && $user['role'] === $role) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            // Redirect based on role
+            switch($role) {
+                case 'admin':
+                    header("Location: ../admin/dashboard.php");
+                    break;
+                case 'customer':
+                    header("Location: ../Customer/dashboard.php");
+                    break;
+                case 'delivery_boy':
+                    header("Location: ../delivery/dashboard.php");
+                    break;
+            }
+            exit();
+        } else {
+            $error_message = "Invalid password or role.";
+        }
     } else {
-        $error_message = "Invalid credentials or role. Please try again.";
+        $error_message = "User not found.";
     }
+    $stmt->close();
+}
+
+// Show success message if redirected from registration
+if (isset($_GET['message'])) {
+    $success_message = $_GET['message'];
 }
 ?>
 
@@ -29,54 +62,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f7fc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
+        body { background-color: #f4f7fc; }
         .card {
-            width: 420px;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-        }
-        .card-body {
-            padding: 2rem;
+            max-width: 500px;
+            margin: 50px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .btn-custom {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
             width: 100%;
             padding: 10px;
-            margin-top: 15px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            border-radius: 5px;
-        }
-        .btn-custom:hover {
-            background-color: #45a049;
-        }
-        .register-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-        .register-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-        .form-control:focus {
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-        }
-        h3 {
-            color: #4CAF50;
         }
     </style>
 </head>
@@ -84,37 +81,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="card">
         <div class="card-body">
             <h3 class="text-center">Login</h3>
+            <?php if (isset($success_message)): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo htmlspecialchars($success_message); ?>
+                </div>
+            <?php endif; ?>
             <?php if (isset($error_message)): ?>
                 <div class="alert alert-danger" role="alert">
-                    <?php echo $error_message; ?>
+                    <?php echo htmlspecialchars($error_message); ?>
                 </div>
             <?php endif; ?>
             <form method="POST" action="">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                    <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="role" class="form-label">Select Role</label>
+                    <label for="role" class="form-label">Role</label>
                     <select class="form-select" id="role" name="role" required>
                         <option value="customer">Customer</option>
-                        <option value="delivery-boy">Delivery Boy</option>
+                        <option value="delivery_boy">Delivery Boy</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-custom">Login</button>
             </form>
-            <div class="register-link">
+            <div class="text-center mt-3">
                 <p>Don't have an account? <a href="../register/finalindex.html">Register here</a></p>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
 

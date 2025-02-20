@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if user is logged in and has customer role
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
+    header("Location: ../login/adminlogin.php");
+    exit();
+}
+
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
 // Check the connection

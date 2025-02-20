@@ -86,18 +86,15 @@ if (!$result) {
                         <i class='bx bxs-message-dots'></i> Messages
                     </a>
                 </li>
+                
+                
                 <li class="nav-item mb-2">
-                    <a href="logout.php" class="nav-link text-white">
-                        <i class='bx bxs-message-dots'></i> logout
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="logout/settings/settings.php" class="nav-link text-white">
+                    <a href="settings.php" class="nav-link text-white">
                         <i class='bx bxs-cog'></i> Settings
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout/logout.php" class="nav-link text-white">
+                    <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout
                     </a>
                 </li>

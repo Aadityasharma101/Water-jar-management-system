@@ -38,8 +38,21 @@ $stmt->execute();
 $result = $stmt->get_result();
 $record = $result->fetch_assoc();
 
+// Debugging output
+var_dump($record); // This will show the contents of $record
+
 // Add this check for status
 $currentStatus = isset($record['status']) ? $record['status'] : 'Pending';
+
+if (isset($record) && is_array($record)) {
+    $customer_name = $record['customer_name'] ?? 'Default Name';
+    $water_quantity = $record['water_quantity'] ?? 0; // Default to 0 if not set
+    $phone = $record['phone'] ?? 'No phone provided';
+    $email = $record['email'] ?? 'No email provided';
+    $delivery_date = $record['delivery_date'] ?? 'No delivery date provided';
+} else {
+    echo "No record found or record is not an array.";
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,31 +77,31 @@ $currentStatus = isset($record['status']) ? $record['status'] : 'Pending';
                     <div class="mb-3">
                         <label for="customerName" class="form-label">Customer Name</label>
                         <input type="text" class="form-control" id="customerName" name="customer_name" 
-                               value="<?php echo htmlspecialchars($record['customer_name']); ?>" required>
+                               value="<?php echo htmlspecialchars($customer_name); ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="waterQuantity" class="form-label">Water Quantity</label>
                         <input type="number" class="form-control" id="waterQuantity" name="water_quantity" 
-                               value="<?php echo htmlspecialchars($record['water_quantity']); ?>" required>
+                               value="<?php echo htmlspecialchars($water_quantity); ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
                         <input type="tel" class="form-control" id="phone" name="phone" 
-                               value="<?php echo htmlspecialchars($record['phone']); ?>" required>
+                               value="<?php echo htmlspecialchars($phone); ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" 
-                               value="<?php echo htmlspecialchars($record['email']); ?>" required>
+                               value="<?php echo htmlspecialchars($email); ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="deliveryDate" class="form-label">Delivery Date</label>
                         <input type="date" class="form-control" id="deliveryDate" name="delivery_date" 
-                               value="<?php echo htmlspecialchars($record['delivery_date']); ?>" required>
+                               value="<?php echo htmlspecialchars($delivery_date); ?>" required>
                     </div>
 
                     <div class="mb-3">

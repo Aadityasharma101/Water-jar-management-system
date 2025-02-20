@@ -1,20 +1,26 @@
 <?php
+// Database connection
 $conn = new mysqli('localhost', 'root', '', 'water_management');
-$result = $conn->query("SELECT * FROM water_records");
-while ($row = $result->fetch_assoc()) {
-    echo "<tr>
-        <td>{$row['id']}</td>
-        <td>{$row['customer_name']}</td>
-        <td>{$row['water_quantity']}</td>
-        <td>{$row['phone']}</td>
-        <td>{$row['email']}</td>
-        <td>{$row['delivery_date']}</td>
-        <td>{$row['status']}</td>
-        <td>
-            <a href='edit.php?id={$row['id']}' class='btn btn-warning'>Edit</a>
-            <a href='delete.php?id={$row['id']}' class='btn btn-danger'>Delete</a>
-        </td>
-    </tr>";
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Fetch records from the database
+$sql = "SELECT * FROM water_records";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        echo "ID: " . $row['id'] . " - Customer Name: " . $row['customer_name'] . " - Status: " . ($row['status'] ?? 'Pending') . "<br>";
+        echo "<a href='delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\");'>Delete</a><br>";
+    }
+} else {
+    echo "No records found.";
+}
+
+// Close the database connection
 $conn->close();
 ?>

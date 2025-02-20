@@ -108,6 +108,15 @@ if (!$result) {
             <div class="container mt-4">
                 <h1 class="mb-4">Water Management Dashboard</h1>
 
+                <?php
+                if (isset($_GET['message'])) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ' . htmlspecialchars($_GET['message']) . '
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>';
+                }
+                ?>
+
                 <!-- Add New Record Button -->
                 <a href="add.php" class="btn btn-primary mb-3">Add New Orders</a>
 
@@ -143,7 +152,7 @@ if (!$result) {
                                             <td>" . htmlspecialchars($row['delivery_date']) . "</td>
                                             <td>" . htmlspecialchars($row['status'] ?? 'Pending') . "</td>
                                             <td>
-                                                <button class='btn btn-info btn-sm'>Edit</button>
+                                                <a href='edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>Edit</a>
                                                 <button class='btn btn-danger btn-sm'>Delete</button>
                                             </td>
                                         </tr>";

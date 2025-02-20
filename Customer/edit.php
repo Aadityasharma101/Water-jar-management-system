@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'sample1'); // Ensure the database name is correct
+$conn = new mysqli('localhost', 'root', '', 'sample'); // Changed from sample1 to sample
 
 // Check connection
 if ($conn->connect_error) {
@@ -22,56 +22,78 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    // Check if a record was found
-    if ($result->num_rows > 0) {
-        $record = $result->fetch_assoc();
-    } else {
-        echo "No record found with ID: " . $id;
-        exit;
-    }
-
+    $record = $result->fetch_assoc(); // Fetch the record
     $stmt->close();
-} else {
-    echo "Invalid ID provided.";
-    exit;
 }
 
-// HTML form for editing the record
-?>
+// Check if $record is defined before accessing it
+if (isset($record)) {
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Record</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+        <div class="container mt-5">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Edit Order Details</h3>
+                </div>
+                <div class="card-body">
+                    <form action="update.php" method="POST">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($record['id']); ?>">
+                        
+                        <div class="mb-3">
+                            <label for="customer_name" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" 
+                                   value="<?php echo htmlspecialchars($record['customer_name']); ?>" required>
+                        </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Record</title>
-</head>
-<body>
-    <h1>Edit Record</h1>
-    <form action="update.php" method="POST">
-        <input type="hidden" name="id" value="<?php echo htmlspecialchars($record['id']); ?>">
-        <label for="customer_name">Customer Name:</label>
-        <input type="text" name="customer_name" value="<?php echo htmlspecialchars($record['customer_name']); ?>" required>
-        <br>
-        <label for="water_quantity">Water Quantity:</label>
-        <input type="number" name="water_quantity" value="<?php echo htmlspecialchars($record['water_quantity']); ?>" required>
-        <br>
-        <label for="phone">Phone:</label>
-        <input type="text" name="phone" value="<?php echo htmlspecialchars($record['phone']); ?>" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($record['email']); ?>" required>
-        <br>
-        <label for="delivery_date">Delivery Date:</label>
-        <input type="date" name="delivery_date" value="<?php echo htmlspecialchars($record['delivery_date']); ?>" required>
-        <br>
-        <button type="submit">Update Record</button>
-    </form>
-</body>
-</html>
+                        <div class="mb-3">
+                            <label for="water_quantity" class="form-label">Water Quantity</label>
+                            <input type="number" class="form-control" id="water_quantity" name="water_quantity" 
+                                   value="<?php echo htmlspecialchars($record['water_quantity']); ?>" required>
+                        </div>
 
-<?php
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" 
+                                   value="<?php echo htmlspecialchars($record['phone']); ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   value="<?php echo htmlspecialchars($record['email']); ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="delivery_date" class="form-label">Delivery Date</label>
+                            <input type="date" class="form-control" id="delivery_date" name="delivery_date" 
+                                   value="<?php echo htmlspecialchars($record['delivery_date']); ?>" required>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Update Order</button>
+                            <a href="dashboard.php" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+    <?php
+} else {
+    echo '<div class="container mt-5"><div class="alert alert-danger">No record found.</div></div>';
+}
+
 // Close the database connection
 $conn->close();
 ?>

@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'sample'); // Changed from sample1 to sample
+$conn = new mysqli('localhost', 'root', '', 'sample');
 
 // Check connection
 if ($conn->connect_error) {

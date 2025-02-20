@@ -90,10 +90,7 @@ if (!$result) {
                     <a href="membership.php" class="nav-link text-white">
                         <i class='bx bxs-cog'></i> Membership
                     </a>
-                <li class="nav-item">
-                    <a href="" class="nav-link text-white">
-                        <i class=''></i> Profile
-                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout

@@ -57,10 +57,10 @@ if (isset($_POST['cancel_logout'])) {
             background-color: #dc3545; /* Red for No */
         }
         .btn-yes:hover {
-            background-color: #218838;
+            background-color:  #c82333;
         }
         .btn-no:hover {
-            background-color: #c82333;
+            background-color: #218838;
         }
     </style>
 </head>

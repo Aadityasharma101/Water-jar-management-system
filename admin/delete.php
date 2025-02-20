@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'sample1');
+$conn = new mysqli('localhost', 'root', '', 'sample');
 $id = $_GET['id'];
 $stmt = $conn->prepare("DELETE FROM water_records WHERE id = ?");
 if (!$stmt) {

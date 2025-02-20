@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'water_management');
+$conn = new mysqli('localhost', 'root', '', 'sample');
 
 // Check connection
 if ($conn->connect_error) {

@@ -178,8 +178,7 @@ if (!$result) {
                                             <td>" . htmlspecialchars($row['delivery_date']) . "</td>
                                             <td>" . htmlspecialchars(isset($row['status']) ? $row['status'] : 'Pending') . "</td>
                                             <td>
-                                                <a href='edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>Edit</a>
-                                                <a href='delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\");'>Delete</a>
+                                                <a href='edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>Delivered</a>
                                             </td>
                                         </tr>";
                                     }

@@ -129,8 +129,8 @@
         
         <div>
             <a href="dashboard.php">Dashboard</a>
-            <a href="#monthly">Monthly</a>
-            <a href="#yearly">Yearly</a>
+            <a href="process_payment.php">Monthly</a>
+            <a href="process_payment.php">Yearly</a>
             <a href="#contact">Contact Us</a>
         </div>
     </nav>

@@ -85,8 +85,8 @@ if (!$result) {
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="../messeges/messege.php" class="nav-link text-white">
-                        <i class='bx bxs-message-dots'></i> Messages
+                    <a href="review.php" class="nav-link text-white">
+                        <i class='bx bxs-message-dots'></i> Rating
                     </a>
                 </li>
                 <li class="nav-item mb-2">

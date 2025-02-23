@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'sample1'); // Ensure the database name is correct
+$conn = new mysqli('localhost', 'root', '', 'sample'); // Ensure the database name is correct
 
 // Check connection
 if ($conn->connect_error) {

@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: ../Customer/dashboard.php");
                     break;
                 case 'delivery_boy':
-                    header("Location: ../delivery/dashboard.php");
+                    header("Location:..//delivery-boy/dashboard.php");
                     break;
             }
             exit();

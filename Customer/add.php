@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $delivery_date = $_POST['delivery_date'];
-    $status = 'Pending'; // Default status
+    $status = 'pending'; // Make sure it's lowercase
 
     // Prepare the SQL statement using the exact column names from your database
     $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, phone, email, delivery_date, status) VALUES (?, ?, ?, ?, ?, ?)");

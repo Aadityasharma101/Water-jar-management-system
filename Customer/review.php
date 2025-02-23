@@ -15,17 +15,26 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login/otherlogin.php");
+    exit();
+}
+
 // Initialize message variable
 $message = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_SESSION['customer_id'])) {
-        $customer_id = $_SESSION['customer_id']; // Assuming customer is logged in
-        $review_text = $_POST['review'];
-        $rating = $_POST['rating'];
-
+    $user_id = $_SESSION['user_id'];
+    $review_text = trim($_POST['review']);
+    $rating = intval($_POST['rating']);
+    
+    // Validate rating
+    if ($rating < 1 || $rating > 5) {
+        $message = "Invalid rating value";
+    } else {
         $stmt = $conn->prepare("INSERT INTO reviews (customer_id, review_text, rating) VALUES (?, ?, ?)");
-        $stmt->bind_param("isi", $customer_id, $review_text, $rating);
+        $stmt->bind_param("isi", $user_id, $review_text, $rating);
 
         if ($stmt->execute()) {
             $message = "Review submitted successfully!";
@@ -33,8 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error: " . $stmt->error;
         }
         $stmt->close();
-    } else {
-        $message = "Please log in to submit a review.";
     }
 }
 ?>

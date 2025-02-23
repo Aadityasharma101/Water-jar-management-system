@@ -128,7 +128,7 @@
     <nav>
         
         <div>
-            <a href="dashboard.php">Dashboard</a>
+            <a href="../Customer/dashboard.php">Dashboard</a>
             <a href="process_payment.php">Monthly</a>
             <a href="process_payment.php">Yearly</a>
             <a href="#contact">Contact Us</a>

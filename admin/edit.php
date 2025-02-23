@@ -107,8 +107,10 @@ if (isset($record) && is_array($record)) {
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select class="form-select" id="status" name="status" required>
-                            <option value="Pending" <?php echo ($currentStatus == 'Pending') ? 'selected' : ''; ?>>Pending</option>
-                            <option value="Delivered" <?php echo ($currentStatus == 'Delivered') ? 'selected' : ''; ?>>Delivered</option>
+                            <option value="pending" <?php echo (strtolower($currentStatus) == 'pending') ? 'selected' : ''; ?>>Pending</option>
+                            <option value="processing" <?php echo (strtolower($currentStatus) == 'processing') ? 'selected' : ''; ?>>Processing</option>
+                            <option value="shipping" <?php echo (strtolower($currentStatus) == 'shipping') ? 'selected' : ''; ?>>Shipping</option>
+                            <option value="delivered" <?php echo (strtolower($currentStatus) == 'delivered') ? 'selected' : ''; ?>>Delivered</option>
                         </select>
                     </div>
 

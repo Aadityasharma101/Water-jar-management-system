@@ -6,6 +6,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit;
+}
+
+$userId = $_SESSION['user_id'];
+
+// Fetch user name from session
+$userName = $_SESSION['user_name'] ?? ''; // Default to empty if not set
+
 $customerQuery = "SELECT COUNT(DISTINCT customer_name) as total_customers FROM water_records";
 $customerResult = $conn->query($customerQuery);
 $totalCustomers = $customerResult->fetch_assoc()['total_customers'];
@@ -68,6 +79,14 @@ if (!$result) {
         .badge-info {
             background-color: #17a2b8;
         }
+        .welcome-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -84,11 +103,7 @@ if (!$result) {
                         <i class='bx bxs-dashboard'></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item mb-2">
-                    <a href="../messeges/messege.php" class="nav-link text-white">
-                        <i class='bx bxs-message-dots'></i> Messages
-                    </a>
-                </li>
+              
                 <li class="nav-item mb-2">
                     <a href="feedback.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Feedback
@@ -122,6 +137,18 @@ if (!$result) {
 
             <!-- Dashboard Content -->
             <div class="container mt-4">
+                <?php if ($userName): ?>
+                    <div class="welcome-message" id="welcomeMessage">
+                        Welcome, <?php echo htmlspecialchars($userName); ?>! You have successfully logged in.
+                    </div>
+                    <script>
+                        // Hide the welcome message after 5 seconds
+                        setTimeout(function() {
+                            document.getElementById('welcomeMessage').style.display = 'none';
+                        }, 5000);
+                    </script>
+                <?php endif; ?>
+
                 <h1 class="mb-4">Water Management Dashboard</h1>
 
                 <?php

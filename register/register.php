@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             // Debug: Print success message
             error_log("User registered successfully - Username: $username, Role: $role");
+            session_start();
+            $_SESSION['user_name'] = $username;
             header("Location: ../login/otherlogin.php?message=Registration+successful.+Please+login.");
             exit();
         } else {
@@ -44,6 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
     }
     $check->close();
+
+    // Clear the user name from the session after displaying it
+    unset($_SESSION['user_name']);
 }
 ?>
 

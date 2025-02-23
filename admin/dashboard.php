@@ -18,6 +18,42 @@ $result = $conn->query("SELECT * FROM water_records");
 if (!$result) {
     die("Error executing query: " . $conn->error);
 }
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    // Insert into messages table
+    $stmt = $conn->prepare("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)");
+    $stmt->bind_param('sss', $name, $email, $message);
+
+    if ($stmt->execute()) {
+        $message_id = $stmt->insert_id; // Get the last inserted message ID
+
+        // Now insert into feedback table
+        $feedback = "Your feedback message"; // Replace with actual feedback
+        $feedback_stmt = $conn->prepare("INSERT INTO feedback (customer_name, email, feedback, message_id) VALUES (?, ?, ?, ?)");
+        $feedback_stmt->bind_param('sssi', $name, $email, $feedback, $message_id);
+
+        if ($feedback_stmt->execute()) {
+            // Redirect or show success message
+            header("Location: thank_you.php");
+            exit();
+        } else {
+            echo "Error inserting feedback: " . $feedback_stmt->error;
+        }
+
+        $feedback_stmt->close();
+    } else {
+        echo "Error inserting message: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,11 +144,7 @@ if (!$result) {
                         <button class="btn btn-outline-light" type="submit">Search</button>
                     </form>
                 </div>
-                <div class="navbar-nav">
-                    <a class="nav-link" href="dashboard.php">Dashboard</a>
-                    <a class="nav-link" href="orders.php">Orders</a>
-                    <a class="nav-link" href="../logout.php">Logout</a>
-                </div>
+             
             </nav>
 
             <!-- Dashboard Content -->
@@ -240,7 +272,3 @@ if (!$result) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-<?php
-$conn->close();
-?>

@@ -9,22 +9,25 @@ if ($conn->connect_error) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['customer_name'];
-    $quantity = (int)$_POST['water_quantity'];
-    $date = $_POST['delivery_date'];
+    $customer_name = $_POST['customer_name'];
+    $water_quantity = (int)$_POST['water_quantity'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $delivery_date = $_POST['delivery_date'];
+    $status = 'Pending'; // Default status
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, delivery_date) VALUES (?, ?, ?)");
+    // Prepare the SQL statement using the exact column names from your database
+    $stmt = $conn->prepare("INSERT INTO water_records (customer_name, water_quantity, phone, email, delivery_date, status) VALUES (?, ?, ?, ?, ?, ?)");
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error);
     }
 
     // Bind parameters
-    $stmt->bind_param("sis", $name, $quantity, $date);
+    $stmt->bind_param("sissss", $customer_name, $water_quantity, $phone, $email, $delivery_date, $status);
 
     // Execute and handle result
     if ($stmt->execute()) {
-        echo "<script>alert('Record added successfully!'); window.location.href='dashboard.php';</script>";
+        echo "<script>alert('Record added successfully!'); window.location.href='../Customer/dashboard.php';</script>";
     } else {
         echo "<script>alert('Error: " . $stmt->error . "');</script>";
     }
@@ -57,10 +60,19 @@ $conn->close();
                 <input type="number" class="form-control" id="water_quantity" name="water_quantity" required>
             </div>
             <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
                 <label for="delivery_date" class="form-label">Delivery Date</label>
                 <input type="date" class="form-control" id="delivery_date" name="delivery_date" required>
             </div>
             <button type="submit" class="btn btn-primary">Add Record</button>
+            <a href="../Customer/dashboard.php" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>

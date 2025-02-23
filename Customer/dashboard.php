@@ -1,10 +1,23 @@
 <?php
 session_start();
+$conn = new mysqli('localhost', 'root', '', 'sample');
 
-// Check if user is logged in and has customer role
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
-    header("Location: ../login/adminlogin.php");
-    exit();
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$customerQuery = "SELECT COUNT(DISTINCT customer_name) as total_customers FROM water_records";
+$customerResult = $conn->query($customerQuery);
+$totalCustomers = $customerResult->fetch_assoc()['total_customers'];
+
+$quantityQuery = "SELECT SUM(water_quantity) as total_quantity FROM water_records";
+$quantityResult = $conn->query($quantityQuery);
+$totalQuantity = $quantityResult->fetch_assoc()['total_quantity'] ?? 0; // Default to 0 if null
+
+$result = $conn->query("SELECT * FROM water_records");
+
+if (!$result) {
+    die("Error executing query: " . $conn->error);
 }
 
 $conn = new mysqli('localhost', 'root', '', 'sample');
@@ -79,11 +92,6 @@ if (!$result) {
                 <li class="nav-item mb-2">
                     <a href="feedback.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Feedback
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="logout/settings/settings.php" class="nav-link text-white">
-                        <i class='bx bxs-cog'></i> Settings
                     </a>
                 </li>
                 <li class="nav-item mb-2">

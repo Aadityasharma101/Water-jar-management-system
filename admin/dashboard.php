@@ -81,22 +81,13 @@ if (!$result) {
                         <i class='bx bxs-dashboard'></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item mb-2">
-                    <a href="feedback.php" class="nav-link text-white">
-                        <i class='bx bxs-message-dots'></i> Feedback
-                    </a>
-                </li>
+               
                 <li class="nav-item mb-2">
                     <a href="view-msg.php" class="nav-link text-white">
                         <i class='bx bxs-message-dots'></i> Messege
                     </a>
                 </li>
                
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="logout/settings/settings.php" class="nav-link text-white">
-                        <i class='bx bxs-cog'></i> Settings
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="logout.php" class="nav-link text-white">
@@ -109,13 +100,18 @@ if (!$result) {
         <!-- MAIN CONTENT -->
         <div class="w-100">
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light px-4 shadow-sm">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand text-white" href="#">AdminHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-light" type="submit">Search</button>
                     </form>
+                </div>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                    <a class="nav-link" href="orders.php">Orders</a>
+                    <a class="nav-link" href="../logout.php">Logout</a>
                 </div>
             </nav>
 

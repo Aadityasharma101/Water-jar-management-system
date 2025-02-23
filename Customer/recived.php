@@ -10,6 +10,14 @@ $status = $_GET['status'] ?? 'N/A';
 $purchase_order_id = $_GET['purchase_order_id'] ?? 'N/A';
 $purchase_order_name = $_GET['purchase_order_name'] ?? 'N/A';
 
+// Function to safely format numbers
+function formatAmount($value) {
+    if (is_numeric($value)) {
+        return 'Rs. ' . number_format((float)$value, 2);
+    }
+    return 'N/A';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -85,11 +93,11 @@ $purchase_order_name = $_GET['purchase_order_name'] ?? 'N/A';
         </tr>
         <tr>
             <td>Amount</td>
-            <td>Rs. <?php echo number_format($amount, 2); ?></td>
+            <td><?php echo formatAmount($amount); ?></td>
         </tr>
         <tr>
             <td>Total Amount</td>
-            <td>Rs. <?php echo number_format($total_amount, 2); ?></td>
+            <td><?php echo formatAmount($total_amount); ?></td>
         </tr>
         <tr>
             <td>Mobile</td>

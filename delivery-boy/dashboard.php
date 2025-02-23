@@ -86,13 +86,6 @@ if (!$result) {
                         <i class='bx bxs-message-dots'></i> Messages
                     </a>
                 </li>
-                
-                
-                <li class="nav-item mb-2">
-                    <a href="settings.php" class="nav-link text-white">
-                        <i class='bx bxs-cog'></i> Settings
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="logout.php" class="nav-link text-white">
                         <i class='bx bxs-log-out-circle'></i> Logout
@@ -104,7 +97,7 @@ if (!$result) {
         <!-- MAIN CONTENT -->
         <div class="w-100">
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light px-4 shadow-sm">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand text-white" href="#">DeliveryHub</a>
                 <div class="collapse navbar-collapse">
                     <form class="d-flex ms-auto">
@@ -112,7 +105,29 @@ if (!$result) {
                         <button class="btn btn-outline-light" type="submit">Search</button>
                     </form>
                 </div>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                    <a class="nav-link" href="deliveries.php">Deliveries</a>
+                    <a class="nav-link" href="../logout.php">Logout</a>
+                </div>
             </nav>
+
+            <!-- Add this after your navbar and before the main content -->
+            <div class="container mt-4">
+                <?php if(isset($_GET['message'])): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php echo htmlspecialchars($_GET['message']); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
+                <?php if(isset($_GET['error'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?php echo htmlspecialchars($_GET['error']); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+            </div>
 
             <!-- Dashboard Content -->
             <div class="container mt-4">
@@ -167,8 +182,10 @@ if (!$result) {
                             <tbody>
                                 <?php
                                 if ($result->num_rows > 0) {
-                                    // Display records
                                     while ($row = $result->fetch_assoc()) {
+                                        $status = htmlspecialchars(isset($row['status']) ? $row['status'] : 'Pending');
+                                        $id = htmlspecialchars($row['id']);
+                                        
                                         echo "<tr>
                                             <td>{$row['id']}</td>
                                             <td>" . htmlspecialchars($row['customer_name']) . "</td>
@@ -176,11 +193,16 @@ if (!$result) {
                                             <td>" . htmlspecialchars($row['phone']) . "</td>
                                             <td>" . htmlspecialchars($row['email']) . "</td>
                                             <td>" . htmlspecialchars($row['delivery_date']) . "</td>
-                                            <td>" . htmlspecialchars(isset($row['status']) ? $row['status'] : 'Pending') . "</td>
-                                            <td>
-                                                <a href='edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>Delivered</a>
-                                            </td>
-                                        </tr>";
+                                            <td>" . $status . "</td>
+                                            <td>";
+                                        
+                                        if ($status == 'Pending') {
+                                            echo "<button onclick='updateStatus($id)' class='btn btn-warning btn-sm'>Pending</button>";
+                                        } else {
+                                            echo "<button class='btn btn-success btn-sm' disabled>Delivered</button>";
+                                        }
+                                        
+                                        echo "</td></tr>";
                                     }
                                 } else {
                                     echo "<tr><td colspan='8' class='text-center'>No records found.</td></tr>";
@@ -239,6 +261,47 @@ if (!$result) {
 
     <!-- Bootstrap JS  This is the bootstrap js  it is very important-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function updateStatus(id) {
+        if (confirm('Are you sure you want to mark this order as delivered?')) {
+            fetch('update_status.php?id=' + id)
+                .then(response => response.text())
+                .then(() => {
+                    // Change button appearance immediately
+                    const button = event.target;
+                    button.className = 'btn btn-success btn-sm';
+                    button.disabled = true;
+                    button.textContent = 'Delivered';
+                    
+                    // Update status cell
+                    const row = button.closest('tr');
+                    const statusCell = row.cells[6]; // Index 6 is the status column
+                    statusCell.textContent = 'Delivered';
+                    
+                    // Show success message
+                    alert('Status updated successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to update status. Please try again.');
+                });
+        }
+    }
+
+    // Add success message handler
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        const error = urlParams.get('error');
+        
+        if (message) {
+            alert(message);
+        }
+        if (error) {
+            alert(error);
+        }
+    });
+    </script>
 </body>
 </html>
 

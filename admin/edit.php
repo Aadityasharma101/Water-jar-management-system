@@ -39,7 +39,7 @@ $result = $stmt->get_result();
 $record = $result->fetch_assoc();
 
 // Debugging output
-var_dump($record); // This will show the contents of $record
+// var_dump($record); // This will show the contents of $record
 
 // Add this check for status
 $currentStatus = isset($record['status']) ? $record['status'] : 'Pending';

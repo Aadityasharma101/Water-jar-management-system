@@ -12,10 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $email = $_POST['email'] ?? '';
+    $phone = $_POST['phone'] ?? '';
     $role = $_POST['role'] ?? 'customer';
 
     // Debug: Print registration details
-    error_log("Registering user - Username: $username, Email: $email, Role: $role");
+    error_log("Registering user - Username: $username, Email: $email, Phone: $phone, Role: $role");
 
     // First, check if username already exists
     $check = $conn->prepare("SELECT id FROM users WHERE username = ?");
@@ -26,10 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
         $error = "Username already exists. Please choose another.";
     } else {
-        // Insert new user
-        $sql = "INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)";
+        // Insert new user with phone number
+        $sql = "INSERT INTO users (username, password, email, phone, role) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $username, $password, $email, $role);
+        $stmt->bind_param("sssss", $username, $password, $email, $phone, $role);
         
         if ($stmt->execute()) {
             // Debug: Print success message
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <form method="POST" action="">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input type="text" class="form-control" id="username" name="username" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" required>
                             </div>
 
                             <div class="mb-3">
@@ -80,7 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : ''; ?>" required>
                             </div>
 
                             <div class="mb-3">
@@ -98,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </form>
 
                         <div class="mt-3 text-center">
-                            Already have an account? <a href="../login/adminlogin.php">Login here</a>
+                            Already have an account? <a href="../login/otherlogin.php">Login here</a>
                         </div>
                     </div>
                 </div>

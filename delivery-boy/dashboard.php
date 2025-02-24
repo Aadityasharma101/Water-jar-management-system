@@ -13,16 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Debug: Show all orders and their statuses
-$all_orders_query = "SELECT * FROM water_records";
-$all_orders = $conn->query($all_orders_query);
 
-echo "<div style='background:#f8f9fa;padding:10px;margin:10px;'>";
-echo "<h4>All Orders in Database:</h4>";
-while ($row = $all_orders->fetch_assoc()) {
-    echo "Order #{$row['id']} - Customer: {$row['customer_name']} - Status: {$row['status']}<br>";
-}
-echo "</div>";
 
 // Get orders that are in pending or shipping status
 $query = "SELECT * FROM water_records WHERE status IN ('pending', 'shipping') ORDER BY delivery_date ASC";

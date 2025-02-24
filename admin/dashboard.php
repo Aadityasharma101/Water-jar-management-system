@@ -1,4 +1,19 @@
 <?php
+
+session_start();
+
+// Check if user is logged in and has delivery_boy role
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../login/otherlogin.php");
+    exit();
+}
+
+$conn = new mysqli('localhost', 'root', '', 'sample');
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
 if ($conn->connect_error) {
@@ -77,14 +92,7 @@ if (!$result) {
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">AdminHub</a>
                     <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashboard.php">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../logout.php">Logout</a>
-                            </li>
-                        </ul>
+                       
                     </div>
                 </div>
             </nav>

@@ -1,5 +1,20 @@
+
 <?php
 session_start();
+
+// Check if user is logged in and has delivery_boy role
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
+    header("Location: ../login/otherlogin.php");
+    exit();
+}
+
+$conn = new mysqli('localhost', 'root', '', 'sample');
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
 $conn = new mysqli('localhost', 'root', '', 'sample');
 
 if ($conn->connect_error) {

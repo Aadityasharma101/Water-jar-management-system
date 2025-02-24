@@ -111,7 +111,7 @@ if (isset($_GET['message'])) {
                 <button type="submit" class="btn btn-custom">Login</button>
             </form>
             <div class="text-center mt-3">
-                <p>Don't have an account? <a href="../register/finalindex.html">Register here</a></p>
+                <p>Don't have an account? <a href="../register/register.php">Register here</a></p>
             </div>
         </div>
     </div>

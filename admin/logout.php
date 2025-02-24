@@ -11,7 +11,7 @@ session_start();
 if (isset($_POST['confirm_logout'])) {
     session_unset();
     session_destroy();
-    header("Location: ../front-page/index.html");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -19,6 +19,16 @@ if (isset($_POST['cancel_logout'])) {
     header("Location: dashboard.php");
     exit();
 }
+
+// Unset all session variables
+$_SESSION = [];
+
+// Destroy the session
+session_destroy();
+
+// Redirect to the login page
+header("Location: ../login.php");
+exit();
 ?>
 
 <!DOCTYPE html>
@@ -57,10 +67,10 @@ if (isset($_POST['cancel_logout'])) {
             background-color: #dc3545; /* Red for No */
         }
         .btn-yes:hover {
-            background-color: #c82333 ;
+            background-color:  #c82333;
         }
         .btn-no:hover {
-            background-color:  #218838;
+            background-color: #218838;
         }
     </style>
 </head>
@@ -74,7 +84,7 @@ if (isset($_POST['cancel_logout'])) {
             <p>Are you sure you want to log out?</p>
 
             <form method="POST">
-              <button type="submit" name="confirm_logout" class="btn btn-yes">Yes, Log out</button>
+                <button type="submit" name="confirm_logout" class="btn btn-yes">Yes, Log out</button>
                 <button type="submit" name="cancel_logout" class="btn btn-no">No, Stay Logged In</button>
             </form>
         </div>
